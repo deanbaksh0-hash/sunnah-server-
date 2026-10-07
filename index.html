@@ -1,0 +1,1434 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Noor — Islamic Learning Hub</title>
+
+<meta name="description"
+content="Noor is a cozy Islamic learning space for Qur'an, duas, dhikr, Islamic history and more.">
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+    --bg: #f6f2e9;
+    --card: rgba(255,255,255,.72);
+    --text: #26372d;
+    --muted: #758077;
+    --green: #56745f;
+    --green-dark: #365541;
+    --gold: #b99552;
+    --border: rgba(45,65,52,.12);
+    --shadow: 0 15px 45px rgba(49,65,53,.09);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(185,149,82,.12), transparent 25%),
+        radial-gradient(circle at 90% 20%, rgba(86,116,95,.12), transparent 25%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: .3s;
+}
+
+body.dark {
+    --bg: #17231d;
+    --card: rgba(31,47,38,.82);
+    --text: #edf2eb;
+    --muted: #aeb9b1;
+    --border: rgba(255,255,255,.08);
+    --shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+
+/* NAVBAR */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    background: rgba(246,242,233,.72);
+    border-bottom: 1px solid var(--border);
+}
+
+body.dark nav {
+    background: rgba(23,35,29,.78);
+}
+
+.nav-inner {
+    max-width: 1200px;
+    margin: auto;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.logo-symbol {
+    width: 39px;
+    height: 39px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: var(--green-dark);
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 7px 20px rgba(54,85,65,.22);
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: var(--green);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+/* MAIN */
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px 24px 100px;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 430px;
+    display: grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.hero-content {
+    animation: fadeUp .7s ease;
+}
+
+.eyebrow {
+    color: var(--green);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(45px, 6vw, 76px);
+    line-height: 1.02;
+    max-width: 700px;
+    margin-bottom: 22px;
+}
+
+.hero h1 span {
+    color: var(--green);
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 570px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.primary {
+    border: none;
+    background: var(--green-dark);
+    color: white;
+    padding: 14px 22px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(54,85,65,.2);
+}
+
+.secondary {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    padding: 14px 22px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+/* HERO CARD */
+
+.hero-card {
+    min-height: 330px;
+    border-radius: 35px;
+    background:
+        linear-gradient(145deg, rgba(54,85,65,.96), rgba(76,104,85,.92));
+    padding: 35px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(46,72,56,.25);
+}
+
+.hero-card::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 50%;
+    right: -80px;
+    top: -70px;
+}
+
+.hero-card::after {
+    content: "☾";
+    position: absolute;
+    right: 30px;
+    top: 25px;
+    font-size: 80px;
+    opacity: .13;
+}
+
+.arabic {
+    font-family: "Playfair Display", serif;
+    font-size: 36px;
+    direction: rtl;
+    margin: 35px 0 20px;
+}
+
+.quote {
+    line-height: 1.7;
+    opacity: .85;
+}
+
+.reference {
+    margin-top: 22px;
+    color: #e2d2a9;
+    font-size: 13px;
+}
+
+/* SECTION */
+
+section {
+    margin-top: 70px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 25px;
+}
+
+.section-heading h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 34px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    margin-top: 7px;
+}
+
+/* LEARNING GRID */
+
+.learning-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.learning-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 23px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: .25s;
+    backdrop-filter: blur(15px);
+}
+
+.learning-card:hover {
+    transform: translateY(-6px);
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    background: rgba(86,116,95,.12);
+    font-size: 24px;
+    margin-bottom: 18px;
+}
+
+.learning-card h3 {
+    margin-bottom: 8px;
+}
+
+.learning-card p {
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* PROGRESS */
+
+.progress-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+}
+
+.progress-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.progress-bar {
+    height: 10px;
+    border-radius: 20px;
+    background: rgba(86,116,95,.12);
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 42%;
+    height: 100%;
+    background: var(--green);
+    border-radius: 20px;
+}
+
+/* TOOLS */
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.tool {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+}
+
+.tool h3 {
+    margin-bottom: 7px;
+}
+
+.tool-description {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 22px;
+}
+
+/* DHIKR */
+
+.counter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.counter-number {
+    font-family: "Playfair Display", serif;
+    font-size: 55px;
+}
+
+.counter button {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: none;
+    background: var(--green-dark);
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(54,85,65,.25);
+}
+
+.reset {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+/* QUIZ */
+
+.quiz-question {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 17px;
+}
+
+.answers {
+    display: grid;
+    gap: 9px;
+}
+
+.answer {
+    padding: 13px;
+    border-radius: 13px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+}
+
+.answer:hover {
+    background: rgba(86,116,95,.08);
+}
+
+.answer.correct {
+    background: rgba(65,130,80,.16);
+    border-color: #6c9d73;
+}
+
+.answer.wrong {
+    background: rgba(170,70,60,.12);
+}
+
+/* LIBRARY */
+
+.search {
+    width: 100%;
+    padding: 15px 18px;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    outline: none;
+    margin-bottom: 20px;
+}
+
+.library {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+}
+
+.book {
+    padding: 22px;
+    border-radius: 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.book:hover {
+    transform: translateY(-4px);
+}
+
+.book span {
+    font-size: 25px;
+}
+
+.book h4 {
+    margin-top: 13px;
+}
+
+.book p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--muted);
+}
+
+.footer-logo {
+    font-family: "Playfair Display", serif;
+    font-size: 25px;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+/* MODAL */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(15,25,19,.55);
+    backdrop-filter: blur(8px);
+    display: none;
+    place-items: center;
+    z-index: 200;
+    padding: 20px;
+}
+
+.modal.show {
+    display: grid;
+}
+
+.modal-content {
+    width: min(600px, 100%);
+    max-height: 80vh;
+    overflow-y: auto;
+    background: var(--bg);
+    border-radius: 27px;
+    padding: 30px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.25);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close {
+    border: none;
+    background: transparent;
+    color: var(--text);
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.lesson {
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+.lesson h3 {
+    color: var(--text);
+    margin: 22px 0 8px;
+}
+
+/* ANIMATION */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width: 850px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .learning-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .library {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width: 550px) {
+
+    .container {
+        padding: 30px 16px 70px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .learning-grid,
+    .tools-grid,
+    .library {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-card {
+        min-height: 280px;
+    }
+
+    .section-heading {
+        display: block;
+    }
+
+    .nav-inner {
+        padding: 0 16px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-inner">
+
+        <div class="logo">
+            <div class="logo-symbol">☾</div>
+            Noor
+        </div>
+
+        <div class="nav-links">
+            <a href="#learn">Learn</a>
+            <a href="#tools">Tools</a>
+            <a href="#library">Library</a>
+        </div>
+
+        <div class="nav-actions">
+            <button class="icon-button" onclick="toggleDark()" title="Toggle theme">
+                ◐
+            </button>
+        </div>
+
+    </div>
+</nav>
+
+<main class="container">
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                Your peaceful learning space
+            </div>
+
+            <h1>
+                Learn. Reflect.
+                <span>Grow.</span>
+            </h1>
+
+            <p>
+                Explore Islam at your own pace with lessons, Qur'an,
+                duas, dhikr and interactive activities — all in one
+                peaceful little corner of the internet.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="primary" onclick="scrollToSection('learn')">
+                    Start learning →
+                </button>
+
+                <button class="secondary" onclick="openLesson('Welcome to Noor')">
+                    Explore Noor
+                </button>
+            </div>
+
+        </div>
+
+        <div class="hero-card">
+
+            <div class="eyebrow" style="color:#d8c38e">
+                Today's reflection
+            </div>
+
+            <div class="arabic">
+                إِنَّ مَعَ الْعُسْرِ يُسْرًا
+            </div>
+
+            <div class="quote">
+                “Indeed, with hardship comes ease.”
+            </div>
+
+            <div class="reference">
+                Qur'an 94:6
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LEARN -->
+
+    <section id="learn">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>What would you like to learn?</h2>
+                <p>Take it one step at a time 🌿</p>
+            </div>
+
+        </div>
+
+        <div class="learning-grid">
+
+            <div class="learning-card"
+                 onclick="openLesson('Qur’an Basics')">
+
+                <div class="card-icon">📖</div>
+
+                <h3>Qur’an Basics</h3>
+
+                <p>
+                    Learn about the Qur'an, its structure,
+                    revelation and how to approach reading it.
+                </p>
+
+            </div>
+
+            <div class="learning-card"
+                 onclick="openLesson('The Five Pillars')">
+
+                <div class="card-icon">🕌</div>
+
+                <h3>Five Pillars</h3>
+
+                <p>
+                    Explore the five foundations of Islamic
+                    practice and why each one matters.
+                </p>
+
+            </div>
+
+            <div class="learning-card"
+                 onclick="openLesson('Prophets')">
+
+                <div class="card-icon">🌙</div>
+
+                <h3>Prophets</h3>
+
+                <p>
+                    Discover stories and lessons from the
+                    prophets mentioned in Islamic tradition.
+                </p>
+
+            </div>
+
+            <div class="learning-card"
+                 onclick="openLesson('Duas')">
+
+                <div class="card-icon">🤲</div>
+
+                <h3>Daily Duas</h3>
+
+                <p>
+                    Learn simple duas for everyday moments,
+                    from waking up to going to sleep.
+                </p>
+
+            </div>
+
+            <div class="learning-card"
+                 onclick="openLesson('Islamic History')">
+
+                <div class="card-icon">📜</div>
+
+                <h3>Islamic History</h3>
+
+                <p>
+                    Explore important events, people and
+                    moments throughout Islamic history.
+                </p>
+
+            </div>
+
+            <div class="learning-card"
+                 onclick="openLesson('Good Character')">
+
+                <div class="card-icon">🌱</div>
+
+                <h3>Good Character</h3>
+
+                <p>
+                    Explore kindness, patience, honesty,
+                    gratitude and other beautiful qualities.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROGRESS -->
+
+    <section>
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Your journey</h2>
+                <p>Small steps still count.</p>
+            </div>
+
+        </div>
+
+        <div class="progress-box">
+
+            <div class="progress-top">
+
+                <strong>Learning progress</strong>
+
+                <span id="progressText">42%</span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill"
+                     id="progressFill"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TOOLS -->
+
+    <section id="tools">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Little tools</h2>
+                <p>Useful things for your daily journey.</p>
+            </div>
+
+        </div>
+
+        <div class="tools-grid">
+
+            <!-- DHIKR -->
+
+            <div class="tool">
+
+                <h3>📿 Dhikr Counter</h3>
+
+                <p class="tool-description">
+                    Keep track of your dhikr.
+                </p>
+
+                <div class="counter">
+
+                    <div>
+                        <div class="counter-number"
+                             id="counter">
+                            0
+                        </div>
+
+                        <small>SubhanAllah</small>
+                    </div>
+
+                    <button onclick="incrementDhikr()">
+                        +1
+                    </button>
+
+                </div>
+
+                <button class="reset"
+                        onclick="resetDhikr()">
+                    Reset counter
+                </button>
+
+            </div>
+
+
+            <!-- QUIZ -->
+
+            <div class="tool">
+
+                <h3>🧠 Quick Quiz</h3>
+
+                <p class="tool-description">
+                    Test what you've learned.
+                </p>
+
+                <div class="quiz-question">
+                    How many pillars of Islam are there?
+                </div>
+
+                <div class="answers">
+
+                    <button class="answer"
+                            onclick="quiz(this,false)">
+                        3
+                    </button>
+
+                    <button class="answer"
+                            onclick="quiz(this,false)">
+                        4
+                    </button>
+
+                    <button class="answer"
+                            onclick="quiz(this,true)">
+                        5
+                    </button>
+
+                    <button class="answer"
+                            onclick="quiz(this,false)">
+                        7
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LIBRARY -->
+
+    <section id="library">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Learning library</h2>
+                <p>Pick something that interests you.</p>
+            </div>
+
+        </div>
+
+        <input
+            class="search"
+            id="search"
+            placeholder="🔎 Search the library..."
+            oninput="searchLibrary()"
+        >
+
+        <div class="library" id="libraryGrid">
+
+            <div class="book" data-name="prayer salah">
+                <span>🕌</span>
+                <h4>Understanding Salah</h4>
+                <p>Learn the basics of prayer.</p>
+            </div>
+
+            <div class="book" data-name="quran revelation">
+                <span>📖</span>
+                <h4>The Qur'an</h4>
+                <p>Explore the final revelation.</p>
+            </div>
+
+            <div class="book" data-name="ramadan fasting">
+                <span>🌙</span>
+                <h4>Ramadan</h4>
+                <p>Learn about fasting and its purpose.</p>
+            </div>
+
+            <div class="book" data-name="charity zakat">
+                <span>💚</span>
+                <h4>Zakat & Charity</h4>
+                <p>Discover the importance of giving.</p>
+            </div>
+
+            <div class="book" data-name="prophet muhammad seerah">
+                <span>🌿</span>
+                <h4>Seerah</h4>
+                <p>Learn about the life of Prophet Muhammad ﷺ.</p>
+            </div>
+
+            <div class="book" data-name="dua supplication">
+                <span>🤲</span>
+                <h4>Making Dua</h4>
+                <p>Learn about supplication.</p>
+            </div>
+
+            <div class="book" data-name="akhlaq character">
+                <span>✨</span>
+                <h4>Akhlaq</h4>
+                <p>Growing beautiful character.</p>
+            </div>
+
+            <div class="book" data-name="islam history">
+                <span>📜</span>
+                <h4>Islamic History</h4>
+                <p>Important moments and people.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-logo">
+        Noor
+    </div>
+
+    <p>
+        A peaceful place to learn, reflect and grow.
+    </p>
+
+    <p style="margin-top:15px;font-size:12px;">
+        Built with curiosity, kindness & ☾
+    </p>
+
+</footer>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Lesson
+            </h2>
+
+            <button class="close"
+                    onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+        <div class="lesson"
+             id="modalBody">
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* DARK MODE */
+
+function toggleDark() {
+
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "noorDark",
+        document.body.classList.contains("dark")
+    );
+
+}
+
+if(localStorage.getItem("noorDark") === "true") {
+    document.body.classList.add("dark");
+}
+
+
+/* SCROLL */
+
+function scrollToSection(id) {
+
+    document
+        .getElementById(id)
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* DHIKR */
+
+let dhikr =
+    Number(localStorage.getItem("dhikr")) || 0;
+
+document.getElementById("counter").textContent =
+    dhikr;
+
+function incrementDhikr() {
+
+    dhikr++;
+
+    document.getElementById("counter").textContent =
+        dhikr;
+
+    localStorage.setItem(
+        "dhikr",
+        dhikr
+    );
+
+}
+
+function resetDhikr() {
+
+    dhikr = 0;
+
+    document.getElementById("counter").textContent =
+        0;
+
+    localStorage.setItem(
+        "dhikr",
+        0
+    );
+
+}
+
+
+/* QUIZ */
+
+function quiz(button, correct) {
+
+    const buttons =
+        document.querySelectorAll(".answer");
+
+    buttons.forEach(b => {
+        b.disabled = true;
+    });
+
+    if(correct) {
+
+        button.classList.add("correct");
+
+        increaseProgress();
+
+    } else {
+
+        button.classList.add("wrong");
+
+        buttons.forEach(b => {
+
+            if(b.textContent.trim() === "5") {
+                b.classList.add("correct");
+            }
+
+        });
+
+    }
+
+}
+
+
+/* PROGRESS */
+
+let progress =
+    Number(localStorage.getItem("progress")) || 42;
+
+function increaseProgress() {
+
+    progress += 5;
+
+    if(progress > 100)
+        progress = 100;
+
+    document.getElementById("progressFill")
+        .style.width = progress + "%";
+
+    document.getElementById("progressText")
+        .textContent = progress + "%";
+
+    localStorage.setItem(
+        "progress",
+        progress
+    );
+
+}
+
+document.getElementById("progressFill")
+    .style.width = progress + "%";
+
+document.getElementById("progressText")
+    .textContent = progress + "%";
+
+
+/* SEARCH */
+
+function searchLibrary() {
+
+    const query =
+        document
+            .getElementById("search")
+            .value
+            .toLowerCase();
+
+    document
+        .querySelectorAll(".book")
+        .forEach(book => {
+
+            const name =
+                book.dataset.name;
+
+            book.style.display =
+                name.includes(query)
+                    ? "block"
+                    : "none";
+
+        });
+
+}
+
+
+/* LESSON MODAL */
+
+const lessons = {
+
+    "Welcome to Noor": `
+        <p>
+            Welcome to Noor 🌙
+        </p>
+
+        <h3>Learn at your own pace</h3>
+
+        <p>
+            Noor is designed to make Islamic learning feel
+            calm, simple and enjoyable. Explore the different
+            topics, try the quiz and come back whenever you
+            want to learn something new.
+        </p>
+
+        <h3>Remember</h3>
+
+        <p>
+            Learning is a journey. You don't have to know
+            everything at once.
+        </p>
+    `,
+
+    "Qur’an Basics": `
+        <p>
+            The Qur'an is the holy book of Islam and Muslims
+            believe it is the word of Allah revealed to
+            Prophet Muhammad ﷺ.
+        </p>
+
+        <h3>How is it organised?</h3>
+
+        <p>
+            The Qur'an contains 114 surahs (chapters).
+            Each surah contains ayahs (verses).
+        </p>
+
+        <h3>A beautiful way to learn</h3>
+
+        <p>
+            Start slowly. Read a small amount, learn its
+            meaning and think about what it teaches.
+        </p>
+    `,
+
+    "The Five Pillars": `
+        <p>
+            The Five Pillars are the five main acts of worship
+            that form the foundation of Islamic practice.
+        </p>
+
+        <h3>The five pillars</h3>
+
+        <p>
+            1. Shahadah — declaration of faith<br><br>
+            2. Salah — prayer<br><br>
+            3. Zakat — obligatory charity<br><br>
+            4. Sawm — fasting during Ramadan<br><br>
+            5. Hajj — pilgrimage to Makkah
+        </p>
+    `,
+
+    "Prophets": `
+        <p>
+            Muslims believe Allah sent prophets to guide
+            humanity.
+        </p>
+
+        <h3>Some prophets</h3>
+
+        <p>
+            Adam, Nuh, Ibrahim, Musa, Isa and Muhammad ﷺ
+            are among the prophets mentioned in Islamic
+            teachings.
+        </p>
+
+        <h3>The final prophet</h3>
+
+        <p>
+            Muslims believe Prophet Muhammad ﷺ was the final
+            prophet and messenger of Allah.
+        </p>
+    `,
+
+    "Duas": `
+        <p>
+            Dua means calling upon or supplicating to Allah.
+        </p>
+
+        <h3>Why make dua?</h3>
+
+        <p>
+            Muslims make dua to ask Allah for help, guidance,
+            forgiveness, protection and many other things.
+        </p>
+
+        <h3>Remember</h3>
+
+        <p>
+            Dua can be made at many different times and in
+            many different situations.
+        </p>
+    `,
+
+    "Islamic History": `
+        <p>
+            Islamic history covers many centuries, cultures
+            and communities.
+        </p>
+
+        <h3>Early Islam</h3>
+
+        <p>
+            Islam began in Arabia in the 7th century with
+            the revelation given to Prophet Muhammad ﷺ.
+        </p>
+
+        <h3>Learning history</h3>
+
+        <p>
+            Studying history can help us understand how
+            Muslim communities developed across the world.
+        </p>
+    `,
+
+    "Good Character": `
+        <p>
+            Good character is an important part of Islamic
+            teaching.
+        </p>
+
+        <h3>Examples</h3>
+
+        <p>
+            Kindness, honesty, patience, forgiveness,
+            generosity and gratitude are all qualities
+            encouraged in Islam.
+        </p>
+
+        <h3>A simple challenge</h3>
+
+        <p>
+            Try choosing one good quality and practising it
+            today.
+        </p>
+    `
+
+};
+
+
+function openLesson(title) {
+
+    document.getElementById("modalTitle")
+        .textContent = title;
+
+    document.getElementById("modalBody")
+        .innerHTML =
+            lessons[title] ||
+            `<p>More learning content coming soon 🌿</p>`;
+
+    document.getElementById("modal")
+        .classList.add("show");
+
+}
+
+function closeModal() {
+
+    document.getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+
+document
+    .getElementById("modal")
+    .addEventListener("click", function(e) {
+
+        if(e.target === this) {
+            closeModal();
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
+```
