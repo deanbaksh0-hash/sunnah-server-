@@ -1,1434 +1,802 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Noor — Islamic Learning Hub</title>
-
-<meta name="description"
-content="Noor is a cozy Islamic learning space for Qur'an, duas, dhikr, Islamic history and more.">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deenly — Islamic Learning Companion</title>
+<meta name="theme-color" content="#070b12" />
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
-
-:root {
-    --bg: #f6f2e9;
-    --card: rgba(255,255,255,.72);
-    --text: #26372d;
-    --muted: #758077;
-    --green: #56745f;
-    --green-dark: #365541;
-    --gold: #b99552;
-    --border: rgba(45,65,52,.12);
-    --shadow: 0 15px 45px rgba(49,65,53,.09);
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: "DM Sans", sans-serif;
+  :root{
+    --bg:#070b12;
+    --bg2:#0b1120;
+    --panel:rgba(13,19,31,.82);
+    --panel2:rgba(18,27,43,.86);
+    --card:#0f1727;
+    --card2:#121c30;
+    --text:#eef5ff;
+    --muted:#91a1b8;
+    --line:rgba(122,161,255,.15);
+    --line2:rgba(119,251,221,.22);
+    --cyan:#69f7df;
+    --blue:#78a9ff;
+    --violet:#b78cff;
+    --pink:#ff70c8;
+    --gold:#ffd76a;
+    --green:#69f7b1;
+    --danger:#ff7272;
+    --shadow:0 24px 70px rgba(0,0,0,.35);
+    --radius:24px;
+    --radius2:18px;
+    --sidebar:260px;
+    --ease:220ms cubic-bezier(.2,.8,.2,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     background:
-        radial-gradient(circle at 10% 10%, rgba(185,149,82,.12), transparent 25%),
-        radial-gradient(circle at 90% 20%, rgba(86,116,95,.12), transparent 25%),
-        var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    transition: .3s;
-}
-
-body.dark {
-    --bg: #17231d;
-    --card: rgba(31,47,38,.82);
-    --text: #edf2eb;
-    --muted: #aeb9b1;
-    --border: rgba(255,255,255,.08);
-    --shadow: 0 20px 50px rgba(0,0,0,.25);
-}
-
-/* NAVBAR */
-
-nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    backdrop-filter: blur(20px);
-    background: rgba(246,242,233,.72);
-    border-bottom: 1px solid var(--border);
-}
-
-body.dark nav {
-    background: rgba(23,35,29,.78);
-}
-
-.nav-inner {
-    max-width: 1200px;
-    margin: auto;
-    height: 75px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    font-weight: 700;
-    font-size: 20px;
-}
-
-.logo-symbol {
-    width: 39px;
-    height: 39px;
-    display: grid;
-    place-items: center;
-    border-radius: 13px;
-    background: var(--green-dark);
-    color: white;
-    font-size: 20px;
-    box-shadow: 0 7px 20px rgba(54,85,65,.22);
-}
-
-.nav-links {
-    display: flex;
-    gap: 25px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--muted);
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.nav-links a:hover {
-    color: var(--green);
-}
-
-.nav-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.icon-button {
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--border);
-    background: var(--card);
-    color: var(--text);
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 17px;
-}
-
-/* MAIN */
-
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 50px 24px 100px;
-}
-
-/* HERO */
-
-.hero {
-    min-height: 430px;
-    display: grid;
-    grid-template-columns: 1.25fr .75fr;
-    gap: 30px;
-    align-items: center;
-}
-
-.hero-content {
-    animation: fadeUp .7s ease;
-}
-
-.eyebrow {
-    color: var(--green);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-}
-
-.hero h1 {
-    font-family: "Playfair Display", serif;
-    font-size: clamp(45px, 6vw, 76px);
-    line-height: 1.02;
-    max-width: 700px;
-    margin-bottom: 22px;
-}
-
-.hero h1 span {
-    color: var(--green);
-}
-
-.hero p {
-    color: var(--muted);
-    font-size: 17px;
-    line-height: 1.7;
-    max-width: 570px;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-}
-
-.primary {
-    border: none;
-    background: var(--green-dark);
-    color: white;
-    padding: 14px 22px;
-    border-radius: 15px;
-    cursor: pointer;
-    font-weight: 700;
-    box-shadow: 0 10px 25px rgba(54,85,65,.2);
-}
-
-.secondary {
-    border: 1px solid var(--border);
-    background: var(--card);
-    color: var(--text);
-    padding: 14px 22px;
-    border-radius: 15px;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-/* HERO CARD */
-
-.hero-card {
-    min-height: 330px;
-    border-radius: 35px;
+      radial-gradient(circle at 10% 10%,rgba(119,251,221,.09),transparent 28%),
+      radial-gradient(circle at 85% 12%,rgba(120,169,255,.10),transparent 24%),
+      radial-gradient(circle at 55% 85%,rgba(183,140,255,.08),transparent 30%),
+      linear-gradient(145deg,var(--bg),var(--bg2));
+    color:var(--text);
+    overflow-x:hidden;
+  }
+  body.light{
+    --bg:#eef5ff;
+    --bg2:#dce7f5;
+    --panel:rgba(255,255,255,.84);
+    --panel2:rgba(247,251,255,.9);
+    --card:#f9fcff;
+    --card2:#edf4ff;
+    --text:#111827;
+    --muted:#5e6b7c;
+    --line:rgba(41,76,125,.13);
+    --line2:rgba(0,159,136,.18);
+    --shadow:0 20px 45px rgba(28,54,92,.11);
+  }
+  button,input,select{font:inherit}
+  button{cursor:pointer}
+  a{color:inherit;text-decoration:none}
+  .app{display:flex;min-height:100vh}
+  .sidebar{
+    position:fixed;left:0;top:0;bottom:0;width:var(--sidebar);
+    padding:20px 14px;
+    background:rgba(8,12,20,.88);
+    backdrop-filter:blur(24px);
+    border-right:1px solid var(--line);
+    z-index:50;
+    display:flex;flex-direction:column;
+  }
+  body.light .sidebar{background:rgba(250,253,255,.9)}
+  .brand{
+    display:flex;align-items:center;gap:11px;padding:8px 9px 20px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:12px;
+  }
+  .brand-mark{
+    width:42px;height:42px;border-radius:14px;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,rgba(105,247,223,.16),rgba(120,169,255,.15));
+    border:1px solid rgba(105,247,223,.28);
+    box-shadow:0 0 24px rgba(105,247,223,.1) inset;
+    position:relative;overflow:hidden;
+  }
+  .brand-mark::before{content:"N";font-weight:900;letter-spacing:.06em;color:var(--cyan);font-size:18px}
+  .brand-title{font-weight:900;letter-spacing:.12em;font-size:15px;text-transform:uppercase}
+  .brand-sub{font-size:10px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}
+  .nav{display:flex;flex-direction:column;gap:6px;overflow:auto;padding-right:4px}
+  .nav-btn{
+    border:1px solid transparent;background:transparent;color:var(--muted);
+    width:100%;text-align:left;border-radius:16px;padding:11px 12px;
+    display:flex;align-items:center;gap:10px;transition:all var(--ease);
+    position:relative;overflow:hidden;
+  }
+  .nav-btn::before{
+    content:"";width:7px;height:7px;border-radius:50%;border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.05);box-shadow:0 0 0 transparent;flex:none;
+  }
+  .nav-btn span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800}
+  .nav-btn:hover{background:rgba(255,255,255,.03);color:var(--text);border-color:var(--line)}
+  .nav-btn.active{
+    background:linear-gradient(90deg,rgba(105,247,223,.10),rgba(120,169,255,.06));
+    color:var(--text);border-color:rgba(105,247,223,.18);
+    box-shadow:0 0 24px rgba(105,247,223,.05) inset;
+  }
+  .nav-btn.active::before{background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+  .side-footer{margin-top:auto;padding:14px 8px 4px;border-top:1px solid var(--line)}
+  .mini-line{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted);margin-top:7px}
+  .mini-line strong{color:var(--text)}
+  .main{
+    width:100%;margin-left:var(--sidebar);padding:18px 18px 48px;
+    transition:all var(--ease);
+  }
+  .main.phone-preview{max-width:420px;margin-left:calc(var(--sidebar) + 25vw);padding-inline:10px}
+  .topbar{
+    position:sticky;top:10px;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:11px 12px;margin-bottom:16px;border:1px solid var(--line);background:var(--panel);
+    backdrop-filter:blur(22px);border-radius:18px;box-shadow:var(--shadow)
+  }
+  .topbar-left,.topbar-right{display:flex;align-items:center;gap:8px}
+  .eyebrow{font-size:10px;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;font-weight:900}
+  .page-title{font-size:16px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+  .icon-btn,.ghost-btn,.primary-btn,.danger-btn{
+    border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);
+    border-radius:13px;padding:9px 12px;transition:all var(--ease);font-weight:800;font-size:12px;
+  }
+  .icon-btn{width:40px;height:40px;padding:0;display:grid;place-items:center}
+  .icon-btn:hover,.ghost-btn:hover{transform:translateY(-1px);border-color:rgba(105,247,223,.3);box-shadow:0 0 20px rgba(105,247,223,.08)}
+  .primary-btn{background:linear-gradient(135deg,rgba(105,247,223,.15),rgba(120,169,255,.18));border-color:rgba(105,247,223,.28)}
+  .primary-btn:hover{transform:translateY(-1px);box-shadow:0 0 24px rgba(105,247,223,.12)}
+  .danger-btn{color:#ffd7d7;border-color:rgba(255,114,114,.25);background:rgba(255,114,114,.06)}
+  .page{display:none;animation:fadeIn .3s ease}.page.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .hero{
+    border:1px solid var(--line);border-radius:30px;padding:30px;
     background:
-        linear-gradient(145deg, rgba(54,85,65,.96), rgba(76,104,85,.92));
-    padding: 35px;
-    color: white;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 25px 60px rgba(46,72,56,.25);
-}
-
-.hero-card::before {
-    content: "";
-    position: absolute;
-    width: 280px;
-    height: 280px;
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 50%;
-    right: -80px;
-    top: -70px;
-}
-
-.hero-card::after {
-    content: "☾";
-    position: absolute;
-    right: 30px;
-    top: 25px;
-    font-size: 80px;
-    opacity: .13;
-}
-
-.arabic {
-    font-family: "Playfair Display", serif;
-    font-size: 36px;
-    direction: rtl;
-    margin: 35px 0 20px;
-}
-
-.quote {
-    line-height: 1.7;
-    opacity: .85;
-}
-
-.reference {
-    margin-top: 22px;
-    color: #e2d2a9;
-    font-size: 13px;
-}
-
-/* SECTION */
-
-section {
-    margin-top: 70px;
-}
-
-.section-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-bottom: 25px;
-}
-
-.section-heading h2 {
-    font-family: "Playfair Display", serif;
-    font-size: 34px;
-}
-
-.section-heading p {
-    color: var(--muted);
-    margin-top: 7px;
-}
-
-/* LEARNING GRID */
-
-.learning-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-}
-
-.learning-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 23px;
-    padding: 25px;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: .25s;
-    backdrop-filter: blur(15px);
-}
-
-.learning-card:hover {
-    transform: translateY(-6px);
-}
-
-.card-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 15px;
-    display: grid;
-    place-items: center;
-    background: rgba(86,116,95,.12);
-    font-size: 24px;
-    margin-bottom: 18px;
-}
-
-.learning-card h3 {
-    margin-bottom: 8px;
-}
-
-.learning-card p {
-    color: var(--muted);
-    line-height: 1.6;
-    font-size: 14px;
-}
-
-/* PROGRESS */
-
-.progress-box {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 25px;
-    padding: 25px;
-    box-shadow: var(--shadow);
-}
-
-.progress-top {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-}
-
-.progress-bar {
-    height: 10px;
-    border-radius: 20px;
-    background: rgba(86,116,95,.12);
-    overflow: hidden;
-}
-
-.progress-fill {
-    width: 42%;
-    height: 100%;
-    background: var(--green);
-    border-radius: 20px;
-}
-
-/* TOOLS */
-
-.tools-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.tool {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 25px;
-    padding: 28px;
-    box-shadow: var(--shadow);
-}
-
-.tool h3 {
-    margin-bottom: 7px;
-}
-
-.tool-description {
-    color: var(--muted);
-    font-size: 14px;
-    margin-bottom: 22px;
-}
-
-/* DHIKR */
-
-.counter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.counter-number {
-    font-family: "Playfair Display", serif;
-    font-size: 55px;
-}
-
-.counter button {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: none;
-    background: var(--green-dark);
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(54,85,65,.25);
-}
-
-.reset {
-    background: transparent;
-    border: none;
-    color: var(--muted);
-    margin-top: 15px;
-    cursor: pointer;
-}
-
-/* QUIZ */
-
-.quiz-question {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 17px;
-}
-
-.answers {
-    display: grid;
-    gap: 9px;
-}
-
-.answer {
-    padding: 13px;
-    border-radius: 13px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text);
-    cursor: pointer;
-    text-align: left;
-}
-
-.answer:hover {
-    background: rgba(86,116,95,.08);
-}
-
-.answer.correct {
-    background: rgba(65,130,80,.16);
-    border-color: #6c9d73;
-}
-
-.answer.wrong {
-    background: rgba(170,70,60,.12);
-}
-
-/* LIBRARY */
-
-.search {
-    width: 100%;
-    padding: 15px 18px;
-    border-radius: 15px;
-    border: 1px solid var(--border);
-    background: var(--card);
-    color: var(--text);
-    outline: none;
-    margin-bottom: 20px;
-}
-
-.library {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 15px;
-}
-
-.book {
-    padding: 22px;
-    border-radius: 20px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    cursor: pointer;
-    transition: .2s;
-}
-
-.book:hover {
-    transform: translateY(-4px);
-}
-
-.book span {
-    font-size: 25px;
-}
-
-.book h4 {
-    margin-top: 13px;
-}
-
-.book p {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 6px;
-}
-
-/* FOOTER */
-
-footer {
-    border-top: 1px solid var(--border);
-    margin-top: 80px;
-    padding: 40px 24px;
-    text-align: center;
-    color: var(--muted);
-}
-
-.footer-logo {
-    font-family: "Playfair Display", serif;
-    font-size: 25px;
-    color: var(--text);
-    margin-bottom: 10px;
-}
-
-/* MODAL */
-
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(15,25,19,.55);
-    backdrop-filter: blur(8px);
-    display: none;
-    place-items: center;
-    z-index: 200;
-    padding: 20px;
-}
-
-.modal.show {
-    display: grid;
-}
-
-.modal-content {
-    width: min(600px, 100%);
-    max-height: 80vh;
-    overflow-y: auto;
-    background: var(--bg);
-    border-radius: 27px;
-    padding: 30px;
-    box-shadow: 0 30px 80px rgba(0,0,0,.25);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.close {
-    border: none;
-    background: transparent;
-    color: var(--text);
-    font-size: 25px;
-    cursor: pointer;
-}
-
-.lesson {
-    line-height: 1.8;
-    color: var(--muted);
-}
-
-.lesson h3 {
-    color: var(--text);
-    margin: 22px 0 8px;
-}
-
-/* ANIMATION */
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* MOBILE */
-
-@media(max-width: 850px) {
-
-    .nav-links {
-        display: none;
-    }
-
-    .hero {
-        grid-template-columns: 1fr;
-    }
-
-    .learning-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .library {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media(max-width: 550px) {
-
-    .container {
-        padding: 30px 16px 70px;
-    }
-
-    .hero h1 {
-        font-size: 48px;
-    }
-
-    .learning-grid,
-    .tools-grid,
-    .library {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-card {
-        min-height: 280px;
-    }
-
-    .section-heading {
-        display: block;
-    }
-
-    .nav-inner {
-        padding: 0 16px;
-    }
-}
-
+      radial-gradient(circle at 10% 0%,rgba(105,247,223,.13),transparent 28%),
+      radial-gradient(circle at 88% 10%,rgba(183,140,255,.12),transparent 25%),
+      linear-gradient(140deg,var(--panel),rgba(12,18,30,.82));
+    box-shadow:var(--shadow);position:relative;overflow:hidden
+  }
+  .hero::after{
+    content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-90px;bottom:-120px;
+    background:radial-gradient(circle,rgba(105,247,223,.11),transparent 70%);filter:blur(8px)
+  }
+  .hero-kicker{font-size:10px;letter-spacing:.22em;color:var(--cyan);font-weight:900;text-transform:uppercase}
+  .hero h1{font-size:clamp(34px,6vw,68px);line-height:.95;margin:10px 0 16px;letter-spacing:-.04em;max-width:760px}
+  .gradient-text{background:linear-gradient(90deg,#fff,var(--cyan),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+  body.light .gradient-text{background:linear-gradient(90deg,#111827,#007b67,#406fba);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{margin:0;color:var(--muted);max-width:720px;line-height:1.7}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+  .stat-card,.panel,.game-card,.talk-card,.learn-card,.dua-card,.story-card,.reward-card{
+    border:1px solid var(--line);background:var(--panel);border-radius:var(--radius2);box-shadow:var(--shadow)
+  }
+  .stat-card{padding:16px}
+  .stat-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:900}
+  .stat-value{font-size:26px;font-weight:900;margin-top:4px;letter-spacing:-.03em}
+  .stat-note{font-size:10px;color:var(--muted);margin-top:3px}
+  .section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:26px 0 12px}
+  .section-head h2{margin:0;font-size:22px;letter-spacing:-.03em}
+  .section-head p{margin:4px 0 0;color:var(--muted);font-size:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .learn-card,.story-card,.dua-card,.talk-card,.game-card,.reward-card{padding:18px;transition:transform var(--ease),border-color var(--ease),box-shadow var(--ease)}
+  .learn-card:hover,.story-card:hover,.dua-card:hover,.talk-card:hover,.game-card:hover,.reward-card:hover{transform:translateY(-2px);border-color:rgba(105,247,223,.25);box-shadow:0 20px 50px rgba(0,0,0,.2),0 0 22px rgba(105,247,223,.04)}
+  .card-kicker{font-size:9px;color:var(--cyan);font-weight:900;letter-spacing:.18em;text-transform:uppercase}
+  .card-title{font-size:17px;font-weight:900;margin-top:7px}
+  .card-copy{color:var(--muted);font-size:12px;line-height:1.6;margin:7px 0 14px}
+  .meter{height:7px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;border:1px solid var(--line)}
+  .meter > span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--violet));box-shadow:0 0 14px rgba(105,247,223,.25);transition:width .4s ease}
+  .inline{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .small{font-size:11px;color:var(--muted)}
+  .search-row{display:flex;gap:8px;flex-wrap:wrap}
+  .input,.select{
+    flex:1;min-width:180px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);
+    border-radius:14px;padding:12px 13px;outline:none
+  }
+  .input:focus,.select:focus{border-color:rgba(105,247,223,.35);box-shadow:0 0 0 3px rgba(105,247,223,.06)}
+  .chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+  .chip{border:1px solid var(--line);background:rgba(255,255,255,.025);color:var(--muted);padding:7px 10px;border-radius:999px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.09em}
+  .chip.active{color:var(--text);border-color:rgba(105,247,223,.28);background:rgba(105,247,223,.07)}
+  .ayah{border-left:2px solid var(--cyan);padding-left:12px;font-family:Georgia,serif;font-size:16px;line-height:1.75;color:var(--text);margin:11px 0}
+  .ref{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.11em}
+  .game-zone{
+    padding:20px;border-radius:26px;
+    background:linear-gradient(135deg,rgba(105,247,223,.04),rgba(120,169,255,.04),rgba(183,140,255,.04));
+    border:1px solid rgba(105,247,223,.12)
+  }
+  .neon-title{font-size:12px;font-weight:1000;letter-spacing:.32em;text-transform:uppercase;color:#f3fbff;text-shadow:0 0 8px rgba(105,247,223,.7),0 0 18px rgba(120,169,255,.4)}
+  .neon-line{height:1px;background:linear-gradient(90deg,transparent,var(--cyan),var(--blue),transparent);box-shadow:0 0 14px rgba(105,247,223,.25);margin:10px 0 16px}
+  .game-card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(10,18,31,.92),rgba(17,24,40,.72));border-color:rgba(105,247,223,.13)}
+  body.light .game-card{background:linear-gradient(145deg,rgba(251,253,255,.96),rgba(232,241,252,.92))}
+  .game-card::after{content:"";position:absolute;inset:auto 0 0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--violet));opacity:.7}
+  .game-code{font-family:"SFMono-Regular",Consolas,monospace;color:var(--cyan);font-size:9px;letter-spacing:.18em}
+  .game-name{font-size:23px;font-weight:1000;letter-spacing:.03em;margin-top:6px}
+  .game-tagline{font-size:11px;color:var(--muted);line-height:1.6;margin:7px 0 15px}
+  .game-buttons{display:flex;flex-wrap:wrap;gap:7px}
+  .game-btn{border:1px solid rgba(105,247,223,.2);background:rgba(105,247,223,.04);color:var(--text);padding:8px 10px;border-radius:11px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:900}
+  .game-btn:hover{border-color:var(--cyan);box-shadow:0 0 18px rgba(105,247,223,.08)}
+  .talk-card{display:flex;flex-direction:column;min-height:205px;background:linear-gradient(145deg,rgba(18,24,40,.84),rgba(11,16,28,.75))}
+  .talk-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+  .talk-index{font-family:"SFMono-Regular",Consolas,monospace;color:var(--violet);font-size:11px;letter-spacing:.15em}
+  .talk-title{font-size:17px;font-weight:900;margin-top:7px;line-height:1.25}
+  .talk-meta{font-size:10px;color:var(--muted);margin-top:7px}
+  .talk-card .card-copy{flex:1}
+  .progress-panel{padding:20px}
+  .progress-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin:13px 0}
+  .progress-row label{font-size:11px;color:var(--muted);margin-bottom:6px;display:block}
+  .progress-row strong{font-size:12px}
+  .reward-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .reward-card.locked{opacity:.48;filter:saturate(.55)}
+  .reward-badge{font-family:"SFMono-Regular",Consolas,monospace;font-size:12px;letter-spacing:.15em;color:var(--gold);padding:6px 8px;border:1px solid rgba(255,215,106,.2);display:inline-block;border-radius:9px}
+  .modal-wrap{position:fixed;inset:0;background:rgba(2,5,10,.68);backdrop-filter:blur(10px);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}
+  .modal-wrap.show{display:flex}
+  .modal{width:min(760px,100%);max-height:min(86vh,820px);overflow:auto;background:var(--panel2);border:1px solid rgba(105,247,223,.18);border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.48);padding:24px}
+  .modal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+  .modal-title{font-size:26px;font-weight:1000}
+  .modal-copy{color:var(--muted);line-height:1.7;font-size:13px}
+.lesson-reading p{margin:0 0 18px}.lesson-reading p:last-child{margin-bottom:0}
+  .question{font-size:20px;font-weight:900;line-height:1.35;margin:18px 0}
+  .option-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .option-btn{padding:13px;border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.025);color:var(--text);text-align:left;font-weight:800}
+  .option-btn:hover{border-color:rgba(105,247,223,.3)}
+  .option-btn.correct{border-color:rgba(105,247,177,.5);background:rgba(105,247,177,.09)}
+  .option-btn.wrong{border-color:rgba(255,114,114,.5);background:rgba(255,114,114,.08)}
+  .game-footer{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px}
+  .game-status{font-size:11px;color:var(--muted)}
+  .memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+  .memory-card{aspect-ratio:1;border:1px solid rgba(105,247,223,.18);border-radius:14px;background:linear-gradient(135deg,rgba(22,31,49,.95),rgba(9,14,25,.92));color:var(--text);font-size:26px;display:grid;place-items:center;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;box-shadow:inset 0 0 22px rgba(105,247,223,.03)}
+  .memory-card:hover{transform:translateY(-1px)}
+  .memory-card.flipped,.memory-card.matched{border-color:var(--cyan);box-shadow:0 0 18px rgba(105,247,223,.12)}
+  .memory-card .front{display:none}.memory-card .back{font-family:"SFMono-Regular",Consolas,monospace;font-size:14px;color:var(--cyan)}
+  .memory-card.flipped .front,.memory-card.matched .front{display:block}.memory-card.flipped .back,.memory-card.matched .back{display:none}
+  .pillars-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.pillar-choice{padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:11px;font-weight:900}.pillar-choice.used{opacity:.4;pointer-events:none}.pillar-choice.correct{border-color:rgba(105,247,177,.5);box-shadow:0 0 16px rgba(105,247,177,.08)}
+  .timer-strip{height:8px;border-radius:999px;background:rgba(255,255,255,.05);overflow:hidden;border:1px solid var(--line);margin-top:10px}.timer-strip span{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--pink));transform-origin:left;transition:width .2s linear}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);padding:11px 15px;border-radius:13px;background:rgba(9,14,23,.94);color:var(--text);border:1px solid rgba(105,247,223,.18);box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:all .25s ease;z-index:150;font-size:12px;font-weight:900;letter-spacing:.06em}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toggle{width:46px;height:26px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);padding:2px;transition:all .2s}.toggle span{display:block;width:20px;height:20px;border-radius:50%;background:#fff;transition:all .2s}.toggle.on{background:rgba(105,247,223,.2);border-color:rgba(105,247,223,.4)}.toggle.on span{transform:translateX(20px);background:var(--cyan);box-shadow:0 0 12px rgba(105,247,223,.7)}
+  .settings-list{display:grid;gap:10px}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025)}.setting-title{font-size:12px;font-weight:900}.setting-sub{font-size:10px;color:var(--muted);margin-top:4px}
+  .dua-list{display:grid;gap:10px}.dua-card .ayah{margin-bottom:9px}
+  .story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .story-ref{font-size:9px;color:var(--violet);font-family:"SFMono-Regular",Consolas,monospace;letter-spacing:.12em}
+  .story-card button{margin-top:8px}
+  .empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:18px}
+  .footer-note{font-size:10px;color:var(--muted);margin-top:18px;line-height:1.6}
+  @media (max-width:1100px){.grid-3,.story-grid{grid-template-columns:1fr 1fr}.reward-grid{grid-template-columns:1fr 1fr}.stat-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:820px){:root{--sidebar:74px}.sidebar{padding:14px 8px}.brand{justify-content:center;border-bottom:0;padding-bottom:12px}.brand-title,.brand-sub,.side-footer{display:none}.brand-mark{width:45px}.nav-btn{justify-content:center;padding:12px}.nav-btn span{display:none}.main{margin-left:var(--sidebar)}.main.phone-preview{margin-left:calc(var(--sidebar) + 6vw)}.grid-3,.grid-2,.story-grid{grid-template-columns:1fr}.option-grid{grid-template-columns:1fr}.memory-grid{grid-template-columns:repeat(4,1fr)}}
+  @media (max-width:560px){.main{padding:10px 8px 34px}.topbar{top:6px}.hero{padding:20px}.hero h1{font-size:42px}.stat-grid{grid-template-columns:1fr 1fr}.reward-grid{grid-template-columns:1fr 1fr}.section-head{align-items:start;flex-direction:column}.topbar-left .page-title{font-size:13px}.main.phone-preview{margin-left:var(--sidebar);max-width:none;padding-right:14px}.mobile-hide{display:none}}
 </style>
 </head>
-
 <body>
-
-<nav>
-    <div class="nav-inner">
-
-        <div class="logo">
-            <div class="logo-symbol">☾</div>
-            Noor
-        </div>
-
-        <div class="nav-links">
-            <a href="#learn">Learn</a>
-            <a href="#tools">Tools</a>
-            <a href="#library">Library</a>
-        </div>
-
-        <div class="nav-actions">
-            <button class="icon-button" onclick="toggleDark()" title="Toggle theme">
-                ◐
-            </button>
-        </div>
-
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div>
+        <div class="brand-title">Deenly</div>
+        <div class="brand-sub">Learn • Reflect • Grow</div>
+      </div>
     </div>
-</nav>
+    <nav class="nav">
+      <button class="nav-btn active" data-section="home"><span>Home</span></button>
+      <button class="nav-btn" data-section="learn"><span>Learn</span></button>
+      <button class="nav-btn" data-section="stories"><span>Stories</span></button>
+      <button class="nav-btn" data-section="duas"><span>Duas</span></button>
+      <button class="nav-btn" data-section="dailyduas"><span>Daily Duas</span></button>
+      <button class="nav-btn" data-section="salah"><span>Salah</span></button>
+      <button class="nav-btn" data-section="talks"><span>Talks</span></button>
+      <button class="nav-btn" data-section="games"><span>Games</span></button>
+      <button class="nav-btn" data-section="rewards"><span>Rewards</span></button>
+      <button class="nav-btn" data-section="sadaqah"><span>Sadaqah</span></button>
+      <button class="nav-btn" data-section="settings"><span>Settings</span></button>
+    </nav>
+    <div class="side-footer">
+      <div class="mini-line"><span>Points</span><strong id="sidePoints">0</strong></div>
+      <div class="mini-line"><span>Streak</span><strong id="sideStreak">0 days</strong></div>
+    </div>
+  </aside>
 
-<main class="container">
-
-    <!-- HERO -->
-
-    <div class="hero">
-
-        <div class="hero-content">
-
-            <div class="eyebrow">
-                Your peaceful learning space
-            </div>
-
-            <h1>
-                Learn. Reflect.
-                <span>Grow.</span>
-            </h1>
-
-            <p>
-                Explore Islam at your own pace with lessons, Qur'an,
-                duas, dhikr and interactive activities — all in one
-                peaceful little corner of the internet.
-            </p>
-
-            <div class="hero-buttons">
-                <button class="primary" onclick="scrollToSection('learn')">
-                    Start learning →
-                </button>
-
-                <button class="secondary" onclick="openLesson('Welcome to Noor')">
-                    Explore Noor
-                </button>
-            </div>
-
+  <main class="main" id="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div>
+          <div class="eyebrow">Deenly features</div>
+          <div class="page-title" id="pageTitle">Home</div>
         </div>
-
-        <div class="hero-card">
-
-            <div class="eyebrow" style="color:#d8c38e">
-                Today's reflection
-            </div>
-
-            <div class="arabic">
-                إِنَّ مَعَ الْعُسْرِ يُسْرًا
-            </div>
-
-            <div class="quote">
-                “Indeed, with hardship comes ease.”
-            </div>
-
-            <div class="reference">
-                Qur'an 94:6
-            </div>
-
-        </div>
-
+      </div>
+      <div class="topbar-right">
+        <button class="ghost-btn" id="previewBtn">Desktop Preview</button>
+        <button class="icon-btn" id="themeBtn" title="Toggle dark mode">DARK</button>
+      </div>
     </div>
 
-
-    <!-- LEARN -->
-
-    <section id="learn">
-
-        <div class="section-heading">
-
-            <div>
-                <h2>What would you like to learn?</h2>
-                <p>Take it one step at a time 🌿</p>
-            </div>
-
+    <section class="page active" id="page-home">
+      <div class="hero">
+        <div class="hero-kicker">Learn more. Reflect more. Build your deen.</div>
+        <h1><span class="gradient-text">A calmer way to learn Islam.</span></h1>
+        <p>Deenly brings learning, stories, duas, salah tools, talks, challenges, rewards and daily habits into one polished space.</p>
+        <div class="hero-actions">
+          <button class="primary-btn" data-section="learn">Start Learning</button>
+          <button class="ghost-btn" data-section="dailyduas">Open Daily Duas</button>
+          <button class="ghost-btn" data-section="talks">Open Talks</button>
+          <button class="ghost-btn" id="homeSadaqah">Open Sadaqah</button>
         </div>
+      </div>
 
-        <div class="learning-grid">
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-label">Points</div><div class="stat-value" id="homePoints">0</div><div class="stat-note">Earned from learning and games</div></div>
+        <div class="stat-card"><div class="stat-label">Daily Streak</div><div class="stat-value" id="homeStreak">0</div><div class="stat-note">Consecutive active days</div></div>
+        <div class="stat-card"><div class="stat-label">Games Played</div><div class="stat-value" id="homeGames">0</div><div class="stat-note">Across the Neon Game Zone</div></div>
+        <div class="stat-card"><div class="stat-label">Best Score</div><div class="stat-value" id="homeBest">0</div><div class="stat-note">Your highest saved game score</div></div>
+      </div>
 
-            <div class="learning-card"
-                 onclick="openLesson('Qur’an Basics')">
-
-                <div class="card-icon">📖</div>
-
-                <h3>Qur’an Basics</h3>
-
-                <p>
-                    Learn about the Qur'an, its structure,
-                    revelation and how to approach reading it.
-                </p>
-
-            </div>
-
-            <div class="learning-card"
-                 onclick="openLesson('The Five Pillars')">
-
-                <div class="card-icon">🕌</div>
-
-                <h3>Five Pillars</h3>
-
-                <p>
-                    Explore the five foundations of Islamic
-                    practice and why each one matters.
-                </p>
-
-            </div>
-
-            <div class="learning-card"
-                 onclick="openLesson('Prophets')">
-
-                <div class="card-icon">🌙</div>
-
-                <h3>Prophets</h3>
-
-                <p>
-                    Discover stories and lessons from the
-                    prophets mentioned in Islamic tradition.
-                </p>
-
-            </div>
-
-            <div class="learning-card"
-                 onclick="openLesson('Duas')">
-
-                <div class="card-icon">🤲</div>
-
-                <h3>Daily Duas</h3>
-
-                <p>
-                    Learn simple duas for everyday moments,
-                    from waking up to going to sleep.
-                </p>
-
-            </div>
-
-            <div class="learning-card"
-                 onclick="openLesson('Islamic History')">
-
-                <div class="card-icon">📜</div>
-
-                <h3>Islamic History</h3>
-
-                <p>
-                    Explore important events, people and
-                    moments throughout Islamic history.
-                </p>
-
-            </div>
-
-            <div class="learning-card"
-                 onclick="openLesson('Good Character')">
-
-                <div class="card-icon">🌱</div>
-
-                <h3>Good Character</h3>
-
-                <p>
-                    Explore kindness, patience, honesty,
-                    gratitude and other beautiful qualities.
-                </p>
-
-            </div>
-
+      <div class="section-head"><div><h2>Today</h2><p>Your quick starting point.</p></div></div>
+      <div class="grid-3">
+        <div class="panel progress-panel">
+          <div class="card-kicker">Learning progress</div>
+          <div class="card-title" id="homeLearningTitle">0% complete</div>
+          <div class="card-copy">Complete learning modules to raise your progress and collect points.</div>
+          <div class="meter"><span id="homeLearnMeter"></span></div>
+          <div class="small" style="margin-top:8px" id="homeLearnText">0 of 6 modules completed</div>
         </div>
-
+        <div class="panel progress-panel">
+          <div class="card-kicker">Prayer reminders</div>
+          <div class="card-title" id="homeReminderState">Reminder OFF</div>
+          <div class="card-copy">Use browser speech to hear the next-prayer reminder while Deenly is open.</div>
+          <button class="primary-btn" id="homeReminder">Toggle Reminder</button>
+        </div>
+        <div class="panel progress-panel">
+          <div class="card-kicker">Dhikr counter</div>
+          <div class="card-title"><span id="homeDhikr">0</span> repetitions</div>
+          <div class="card-copy">Tap to count and reset whenever you like.</div>
+          <div class="hero-actions" style="margin-top:0"><button class="primary-btn" id="homeDhikrAdd">Count</button><button class="ghost-btn" id="homeDhikrReset">Reset</button></div>
+        </div>
+      </div>
     </section>
 
-
-    <!-- PROGRESS -->
-
-    <section>
-
-        <div class="section-heading">
-
-            <div>
-                <h2>Your journey</h2>
-                <p>Small steps still count.</p>
-            </div>
-
-        </div>
-
-        <div class="progress-box">
-
-            <div class="progress-top">
-
-                <strong>Learning progress</strong>
-
-                <span id="progressText">42%</span>
-
-            </div>
-
-            <div class="progress-bar">
-
-                <div class="progress-fill"
-                     id="progressFill"></div>
-
-            </div>
-
-        </div>
-
+    <section class="page" id="page-learn">
+      <div class="section-head"><div><h2>Learning path</h2><p>Short modules with saved progress and points.</p></div></div>
+      <div class="grid-3" id="learnGrid"></div>
     </section>
 
-
-    <!-- TOOLS -->
-
-    <section id="tools">
-
-        <div class="section-heading">
-
-            <div>
-                <h2>Little tools</h2>
-                <p>Useful things for your daily journey.</p>
-            </div>
-
-        </div>
-
-        <div class="tools-grid">
-
-            <!-- DHIKR -->
-
-            <div class="tool">
-
-                <h3>📿 Dhikr Counter</h3>
-
-                <p class="tool-description">
-                    Keep track of your dhikr.
-                </p>
-
-                <div class="counter">
-
-                    <div>
-                        <div class="counter-number"
-                             id="counter">
-                            0
-                        </div>
-
-                        <small>SubhanAllah</small>
-                    </div>
-
-                    <button onclick="incrementDhikr()">
-                        +1
-                    </button>
-
-                </div>
-
-                <button class="reset"
-                        onclick="resetDhikr()">
-                    Reset counter
-                </button>
-
-            </div>
-
-
-            <!-- QUIZ -->
-
-            <div class="tool">
-
-                <h3>🧠 Quick Quiz</h3>
-
-                <p class="tool-description">
-                    Test what you've learned.
-                </p>
-
-                <div class="quiz-question">
-                    How many pillars of Islam are there?
-                </div>
-
-                <div class="answers">
-
-                    <button class="answer"
-                            onclick="quiz(this,false)">
-                        3
-                    </button>
-
-                    <button class="answer"
-                            onclick="quiz(this,false)">
-                        4
-                    </button>
-
-                    <button class="answer"
-                            onclick="quiz(this,true)">
-                        5
-                    </button>
-
-                    <button class="answer"
-                            onclick="quiz(this,false)">
-                        7
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
+    <section class="page" id="page-stories">
+      <div class="section-head"><div><h2>Prophet stories</h2><p>Open a reader modal for each story.</p></div></div>
+      <div class="story-grid" id="storyGrid"></div>
     </section>
 
-
-    <!-- LIBRARY -->
-
-    <section id="library">
-
-        <div class="section-heading">
-
-            <div>
-                <h2>Learning library</h2>
-                <p>Pick something that interests you.</p>
-            </div>
-
+    <section class="page" id="page-duas">
+      <div class="section-head"><div><h2>Duas</h2><p>Search by title, situation or category.</p></div></div>
+      <div class="panel progress-panel">
+        <div class="search-row">
+          <input class="input" id="duaSearch" placeholder="Search duas..." />
+          <select class="select" id="duaCategory"><option value="all">All categories</option><option value="daily">Daily life</option><option value="worship">Worship</option><option value="protection">Protection</option><option value="family">Family</option><option value="guidance">Guidance</option></select>
         </div>
-
-        <input
-            class="search"
-            id="search"
-            placeholder="🔎 Search the library..."
-            oninput="searchLibrary()"
-        >
-
-        <div class="library" id="libraryGrid">
-
-            <div class="book" data-name="prayer salah">
-                <span>🕌</span>
-                <h4>Understanding Salah</h4>
-                <p>Learn the basics of prayer.</p>
-            </div>
-
-            <div class="book" data-name="quran revelation">
-                <span>📖</span>
-                <h4>The Qur'an</h4>
-                <p>Explore the final revelation.</p>
-            </div>
-
-            <div class="book" data-name="ramadan fasting">
-                <span>🌙</span>
-                <h4>Ramadan</h4>
-                <p>Learn about fasting and its purpose.</p>
-            </div>
-
-            <div class="book" data-name="charity zakat">
-                <span>💚</span>
-                <h4>Zakat & Charity</h4>
-                <p>Discover the importance of giving.</p>
-            </div>
-
-            <div class="book" data-name="prophet muhammad seerah">
-                <span>🌿</span>
-                <h4>Seerah</h4>
-                <p>Learn about the life of Prophet Muhammad ﷺ.</p>
-            </div>
-
-            <div class="book" data-name="dua supplication">
-                <span>🤲</span>
-                <h4>Making Dua</h4>
-                <p>Learn about supplication.</p>
-            </div>
-
-            <div class="book" data-name="akhlaq character">
-                <span>✨</span>
-                <h4>Akhlaq</h4>
-                <p>Growing beautiful character.</p>
-            </div>
-
-            <div class="book" data-name="islam history">
-                <span>📜</span>
-                <h4>Islamic History</h4>
-                <p>Important moments and people.</p>
-            </div>
-
-        </div>
-
+        <div class="chips" id="duaChips"></div>
+      </div>
+      <div class="dua-list" id="duaList" style="margin-top:12px"></div>
     </section>
 
-</main>
+    <section class="page" id="page-dailyduas">
+      <div class="section-head"><div><h2>Daily Duas</h2><p>A dedicated set of duas for regular moments in the day.</p></div><button class="primary-btn" id="dailyRefresh">New focus</button></div>
+      <div class="hero" style="padding:24px">
+        <div class="hero-kicker">Today’s focus</div>
+        <h2 id="dailyFocusTitle" style="font-size:30px;margin:8px 0">Daily focus</h2>
+        <p id="dailyFocusCopy">A small daily habit can become a lasting one.</p>
+        <div class="ayah" id="dailyFocusText"></div>
+        <div class="ref" id="dailyFocusRef"></div>
+        <div class="hero-actions"><button class="primary-btn" id="dailyFocusComplete">Complete +15</button></div>
+      </div>
+      <div class="section-head"><div><h2>Daily set</h2><p>Useful reminders you can revisit every day.</p></div></div>
+      <div class="grid-2" id="dailyDuaGrid"></div>
+    </section>
 
-
-<footer>
-
-    <div class="footer-logo">
-        Noor
-    </div>
-
-    <p>
-        A peaceful place to learn, reflect and grow.
-    </p>
-
-    <p style="margin-top:15px;font-size:12px;">
-        Built with curiosity, kindness & ☾
-    </p>
-
-</footer>
-
-
-<!-- MODAL -->
-
-<div class="modal" id="modal">
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2 id="modalTitle">
-                Lesson
-            </h2>
-
-            <button class="close"
-                    onclick="closeModal()">
-                ×
-            </button>
-
+    <section class="page" id="page-salah">
+      <div class="section-head"><div><h2>Salah</h2><p>Live countdown to the next prayer. Online mode fetches London times; offline mode uses a fallback schedule.</p></div><button class="ghost-btn" id="refreshPrayers">Refresh</button></div>
+      <div class="grid-2">
+        <div class="hero">
+          <div class="hero-kicker">Next prayer</div>
+          <h2 id="nextPrayerName" style="font-size:34px;margin:9px 0 2px">Loading</h2>
+          <div class="card-copy" id="nextPrayerTime">--:--</div>
+          <div style="font-size:46px;font-weight:1000;letter-spacing:.06em" id="countdown">00:00:00</div>
+          <div class="timer-strip"><span id="prayerProgress"></span></div>
         </div>
-
-        <div class="lesson"
-             id="modalBody">
+        <div class="panel progress-panel">
+          <div class="card-kicker">Dhikr counter</div>
+          <div style="font-size:56px;font-weight:1000;line-height:1" id="dhikrCount">0</div>
+          <div class="card-copy">Count repetitions while you use the app.</div>
+          <div class="hero-actions" style="margin-top:0"><button class="primary-btn" id="dhikrAdd">Count</button><button class="ghost-btn" id="dhikrReset">Reset</button></div>
         </div>
+      </div>
+      <div class="section-head"><div><h2>Prayer times</h2><p id="prayerSource">Waiting for prayer times...</p></div></div>
+      <div class="grid-3" id="prayerGrid"></div>
+      <div class="section-head"><div><h2>Reminder controls</h2><p>Keep browser speech available for the next prayer.</p></div></div>
+      <div class="panel progress-panel">
+        <div class="settings-list">
+          <div class="setting-row"><div><div class="setting-title">Prayer reminder</div><div class="setting-sub">Checks for the next prayer while this tab is open.</div></div><button class="toggle" id="reminderToggle"><span></span></button></div>
+          <div class="setting-row"><div><div class="setting-title">Speak reminder now</div><div class="setting-sub">Uses your browser's text-to-speech.</div></div><button class="primary-btn" id="speakReminder">Speak</button></div>
+        </div>
+      </div>
+    </section>
 
-    </div>
+    <section class="page" id="page-talks">
+      <div class="section-head"><div><h2>Talks</h2><p>Selected Nouman Ali Khan talks from the official Bayyinah YouTube channel.</p></div><a class="ghost-btn" href="https://www.youtube.com/@bayyinah" target="_blank" rel="noopener">Open Channel</a></div>
+      <div class="grid-2" id="talkGrid"></div>
+      <div class="footer-note">Talk links point to YouTube. Titles are presented as a simple learning shelf inside Deenly.</div>
+    </section>
 
+    <section class="page" id="page-games">
+      <div class="game-zone">
+        <div class="neon-title">NEON GAME ZONE</div>
+        <div class="neon-line"></div>
+        <div class="grid-3">
+          <div class="game-card"><div class="game-code">01 // QUIZ</div><div class="game-name">PROPHET RUSH</div><div class="game-tagline">Test your knowledge. Beat the clock. Build your score.</div><div class="game-buttons"><button class="game-btn" data-game="prophet">Launch</button></div></div>
+          <div class="game-card"><div class="game-code">02 // MEMORY</div><div class="game-name">DEEN MATCH</div><div class="game-tagline">Flip. Match. Remember.<br>Keep the memory-game symbols/cards.</div><div class="game-buttons"><button class="game-btn" data-game="memory">Launch</button></div></div>
+          <div class="game-card"><div class="game-code">03 // ORDER</div><div class="game-name">PILLARS SPRINT</div><div class="game-tagline">Think fast. Put the Five Pillars in order.</div><div class="game-buttons"><button class="game-btn" data-game="pillars">Launch</button></div></div>
+          <div class="game-card"><div class="game-code">04 // MATCH</div><div class="game-name">DUA DETECTIVE</div><div class="game-tagline">Match the right dua to the right situation.</div><div class="game-buttons"><button class="game-btn" data-game="dua">Launch</button></div></div>
+          <div class="game-card"><div class="game-code">05 // TIMED</div><div class="game-name">FACT ATTACK</div><div class="game-tagline">True or false. No second chances.</div><div class="game-buttons"><button class="game-btn" data-game="fact">Launch</button></div></div>
+          <div class="game-card"><div class="game-code">06 // DAILY</div><div class="game-name">DAILY CHALLENGE</div><div class="game-tagline">One challenge. One score. Every day.</div><div class="game-buttons"><button class="game-btn" data-game="daily">Launch</button></div></div>
+        </div>
+        <div style="margin-top:26px">
+          <div class="neon-title">BUILD YOUR STREAK</div>
+          <div class="neon-line"></div>
+          <div class="small">Learn more. Play more. Unlock more.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-rewards">
+      <div class="section-head"><div><h2>Rewards</h2><p>Unlockable badges update automatically from your progress.</p></div></div>
+      <div class="reward-grid" id="rewardGrid"></div>
+    </section>
+
+    <section class="page" id="page-sadaqah">
+      <div class="hero">
+        <div class="hero-kicker">Give with intention</div>
+        <h2 style="font-size:42px;margin:9px 0">Sadaqah</h2>
+        <p>Open a real charity page to make a donation. Deenly also records a small in-app points reward for visiting the giving page.</p>
+        <div class="hero-actions"><button class="primary-btn" id="charityBtn">Open Islamic Relief UK Sadaqah</button></div>
+        <div class="footer-note">Charity destination: Islamic Relief UK Sadaqah page.</div>
+      </div>
+    </section>
+
+    <section class="page" id="page-settings">
+      <div class="section-head"><div><h2>Settings</h2><p>Control the app experience and saved progress.</p></div></div>
+      <div class="settings-list">
+        <div class="setting-row"><div><div class="setting-title">Dark mode</div><div class="setting-sub">Switch between the dark neon interface and a light version.</div></div><button class="toggle on" id="settingsTheme"><span></span></button></div>
+        <div class="setting-row"><div><div class="setting-title">Game sound</div><div class="setting-sub">Enable short interface and game sounds.</div></div><button class="toggle on" id="soundToggle"><span></span></button></div>
+        <div class="setting-row"><div><div class="setting-title">Prayer reminder</div><div class="setting-sub">Enable browser speech reminders for the next prayer.</div></div><button class="toggle" id="settingsReminder"><span></span></button></div>
+        <div class="setting-row"><div><div class="setting-title">Mobile preview</div><div class="setting-sub">Preview the layout in a narrow phone-style viewport.</div></div><button class="primary-btn" id="settingsPreview">Switch Preview</button></div>
+        <div class="setting-row"><div><div class="setting-title">Reset progress</div><div class="setting-sub">Clears points, streaks, learning progress and game records.</div></div><button class="danger-btn" id="resetProgress">Reset All</button></div>
+      </div>
+    </section>
+  </main>
 </div>
 
+<div class="modal-wrap" id="modalWrap">
+  <div class="modal" id="modal"></div>
+</div>
+<div class="toast" id="toast">Saved</div>
 
 <script>
-
-/* DARK MODE */
-
-function toggleDark() {
-
-    document.body.classList.toggle("dark");
-
-    localStorage.setItem(
-        "noorDark",
-        document.body.classList.contains("dark")
-    );
-
-}
-
-if(localStorage.getItem("noorDark") === "true") {
-    document.body.classList.add("dark");
-}
-
-
-/* SCROLL */
-
-function scrollToSection(id) {
-
-    document
-        .getElementById(id)
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-}
-
-
-/* DHIKR */
-
-let dhikr =
-    Number(localStorage.getItem("dhikr")) || 0;
-
-document.getElementById("counter").textContent =
-    dhikr;
-
-function incrementDhikr() {
-
-    dhikr++;
-
-    document.getElementById("counter").textContent =
-        dhikr;
-
-    localStorage.setItem(
-        "dhikr",
-        dhikr
-    );
-
-}
-
-function resetDhikr() {
-
-    dhikr = 0;
-
-    document.getElementById("counter").textContent =
-        0;
-
-    localStorage.setItem(
-        "dhikr",
-        0
-    );
-
-}
-
-
-/* QUIZ */
-
-function quiz(button, correct) {
-
-    const buttons =
-        document.querySelectorAll(".answer");
-
-    buttons.forEach(b => {
-        b.disabled = true;
-    });
-
-    if(correct) {
-
-        button.classList.add("correct");
-
-        increaseProgress();
-
-    } else {
-
-        button.classList.add("wrong");
-
-        buttons.forEach(b => {
-
-            if(b.textContent.trim() === "5") {
-                b.classList.add("correct");
-            }
-
-        });
-
-    }
-
-}
-
-
-/* PROGRESS */
-
-let progress =
-    Number(localStorage.getItem("progress")) || 42;
-
-function increaseProgress() {
-
-    progress += 5;
-
-    if(progress > 100)
-        progress = 100;
-
-    document.getElementById("progressFill")
-        .style.width = progress + "%";
-
-    document.getElementById("progressText")
-        .textContent = progress + "%";
-
-    localStorage.setItem(
-        "progress",
-        progress
-    );
-
-}
-
-document.getElementById("progressFill")
-    .style.width = progress + "%";
-
-document.getElementById("progressText")
-    .textContent = progress + "%";
-
-
-/* SEARCH */
-
-function searchLibrary() {
-
-    const query =
-        document
-            .getElementById("search")
-            .value
-            .toLowerCase();
-
-    document
-        .querySelectorAll(".book")
-        .forEach(book => {
-
-            const name =
-                book.dataset.name;
-
-            book.style.display =
-                name.includes(query)
-                    ? "block"
-                    : "none";
-
-        });
-
-}
-
-
-/* LESSON MODAL */
-
-const lessons = {
-
-    "Welcome to Noor": `
-        <p>
-            Welcome to Noor 🌙
-        </p>
-
-        <h3>Learn at your own pace</h3>
-
-        <p>
-            Noor is designed to make Islamic learning feel
-            calm, simple and enjoyable. Explore the different
-            topics, try the quiz and come back whenever you
-            want to learn something new.
-        </p>
-
-        <h3>Remember</h3>
-
-        <p>
-            Learning is a journey. You don't have to know
-            everything at once.
-        </p>
-    `,
-
-    "Qur’an Basics": `
-        <p>
-            The Qur'an is the holy book of Islam and Muslims
-            believe it is the word of Allah revealed to
-            Prophet Muhammad ﷺ.
-        </p>
-
-        <h3>How is it organised?</h3>
-
-        <p>
-            The Qur'an contains 114 surahs (chapters).
-            Each surah contains ayahs (verses).
-        </p>
-
-        <h3>A beautiful way to learn</h3>
-
-        <p>
-            Start slowly. Read a small amount, learn its
-            meaning and think about what it teaches.
-        </p>
-    `,
-
-    "The Five Pillars": `
-        <p>
-            The Five Pillars are the five main acts of worship
-            that form the foundation of Islamic practice.
-        </p>
-
-        <h3>The five pillars</h3>
-
-        <p>
-            1. Shahadah — declaration of faith<br><br>
-            2. Salah — prayer<br><br>
-            3. Zakat — obligatory charity<br><br>
-            4. Sawm — fasting during Ramadan<br><br>
-            5. Hajj — pilgrimage to Makkah
-        </p>
-    `,
-
-    "Prophets": `
-        <p>
-            Muslims believe Allah sent prophets to guide
-            humanity.
-        </p>
-
-        <h3>Some prophets</h3>
-
-        <p>
-            Adam, Nuh, Ibrahim, Musa, Isa and Muhammad ﷺ
-            are among the prophets mentioned in Islamic
-            teachings.
-        </p>
-
-        <h3>The final prophet</h3>
-
-        <p>
-            Muslims believe Prophet Muhammad ﷺ was the final
-            prophet and messenger of Allah.
-        </p>
-    `,
-
-    "Duas": `
-        <p>
-            Dua means calling upon or supplicating to Allah.
-        </p>
-
-        <h3>Why make dua?</h3>
-
-        <p>
-            Muslims make dua to ask Allah for help, guidance,
-            forgiveness, protection and many other things.
-        </p>
-
-        <h3>Remember</h3>
-
-        <p>
-            Dua can be made at many different times and in
-            many different situations.
-        </p>
-    `,
-
-    "Islamic History": `
-        <p>
-            Islamic history covers many centuries, cultures
-            and communities.
-        </p>
-
-        <h3>Early Islam</h3>
-
-        <p>
-            Islam began in Arabia in the 7th century with
-            the revelation given to Prophet Muhammad ﷺ.
-        </p>
-
-        <h3>Learning history</h3>
-
-        <p>
-            Studying history can help us understand how
-            Muslim communities developed across the world.
-        </p>
-    `,
-
-    "Good Character": `
-        <p>
-            Good character is an important part of Islamic
-            teaching.
-        </p>
-
-        <h3>Examples</h3>
-
-        <p>
-            Kindness, honesty, patience, forgiveness,
-            generosity and gratitude are all qualities
-            encouraged in Islam.
-        </p>
-
-        <h3>A simple challenge</h3>
-
-        <p>
-            Try choosing one good quality and practising it
-            today.
-        </p>
-    `
-
+const STORAGE_KEY = 'noor_islamic_companion_v1';
+const fallbackPrayers = [
+  {name:'Fajr',time:'05:30'},{name:'Dhuhr',time:'13:00'},{name:'Asr',time:'16:30'},{name:'Maghrib',time:'18:20'},{name:'Isha',time:'20:00'}
+];
+const state = {
+  points:0, streak:0, lastActive:'', gamesPlayed:0, bestScore:0,
+  sound:true, dark:true, previewPhone:false, reminder:false, dhikr:0,
+  learning:{}, rewards:{}, dailyDone:{}, bestByGame:{}, prayerTimes:fallbackPrayers, prayerSource:'Offline fallback schedule',
+  todayFocus:0, dailyGameDone:''
 };
 
+const stories = [
+  {name:'Adam',ref:'Quran 2:30–39',summary:'Adam is taught and honoured, then learns the lesson of turning back to Allah after a mistake.',body:'This story reminds us that being human includes making mistakes, but sincere repentance and returning to Allah are always meaningful. The opening of human life is connected with knowledge, responsibility and accountability.'},
+  {name:'Nuh',ref:'Quran 11:25–49',summary:'Nuh calls his people with patience through rejection and hardship.',body:'Nuh continues calling people to worship Allah even when the response is painful. His story teaches patience, trust and the importance of staying firm when doing what is right.'},
+  {name:'Ibrahim',ref:'Quran 6:74–83',summary:'Ibrahim questions false worship and searches for the truth with clarity and courage.',body:'Ibrahim challenges ideas that his people accepted without thought. His example is powerful for anyone learning to think carefully, worship Allah sincerely and stay brave when the truth is difficult.'},
+  {name:'Yusuf',ref:'Quran 12',summary:'Yusuf moves through betrayal, hardship and success while keeping his trust in Allah.',body:'Yusuf faces jealousy, separation, false accusation and imprisonment. Yet his character remains strong. The story is a reminder that patience can carry a person through long seasons of uncertainty.'},
+  {name:'Musa',ref:'Quran 20:9–79',summary:'Musa is sent to Pharaoh and learns to rely on Allah through fear and pressure.',body:'Musa is given a difficult mission and asks Allah for strength, clarity and support. His story highlights courage, prayer and the idea that a difficult task can still be worth doing.'},
+  {name:'Yunus',ref:'Quran 21:87–88',summary:'Yunus turns back to Allah in the darkness and is answered.',body:'Yunus calls upon Allah after finding himself in a place of deep difficulty. His story is often remembered as a lesson in repentance, humility and hope when a person feels trapped.'},
+  {name:'Ayyub',ref:'Quran 21:83–84',summary:'Ayyub remains patient through hardship and keeps his trust in Allah.',body:'Ayyub asks Allah for mercy while remaining devoted. His story is a reminder that patience is active, hopeful and connected to trust in Allah.'},
+  {name:'Sulayman',ref:'Quran 27:15–44',summary:'Sulayman receives great blessings and recognises that they come from Allah.',body:'Sulayman is given knowledge, leadership and remarkable abilities. Instead of treating these as reasons for pride, the story repeatedly points back to gratitude and recognising Allah as the true source of blessing.'},
+  {name:'Zakariyya',ref:'Quran 19:2–15',summary:'Zakariyya makes a sincere private dua and is given hope.',body:'Zakariyya asks Allah for a righteous heir despite his age and circumstances. The story is a powerful reminder that sincere dua can be made even when the situation looks difficult.'},
+  {name:'Isa',ref:'Quran 19:16–36',summary:'The birth and message of Isa are presented as signs and mercy from Allah.',body:'The Quran presents the story of Maryam and Isa with emphasis on Allah’s power, mercy and the miraculous nature of Isa’s birth.'},
+  {name:'Muhammad',ref:'Quran 33:21',summary:'The Prophet Muhammad is presented as an excellent example for believers.',body:'The Quran directs believers toward the example of the Messenger of Allah. Learning about his patience, mercy, honesty and worship can help turn information into character.'}
+];
 
-function openLesson(title) {
+const duas = [
+  {title:'Waking up',cat:'daily',situation:'When you wake up',text:"Al-hamdu lillahil-ladhi ahyana ba'da ma amatana wa ilayhin-nushur.",ref:'Sahih al-Bukhari'},
+  {title:'Before eating',cat:'daily',situation:'Before starting a meal',text:'Bismillah.',ref:'Sunan Abi Dawud'},
+  {title:'After eating',cat:'daily',situation:'After a meal',text:"Alhamdu lillahil-ladhi at'amani hadha wa razaqanihi.",ref:'Sunan Abi Dawud'},
+  {title:'Before sleeping',cat:'daily',situation:'Before going to sleep',text:'Bismika Allahumma amutu wa ahya.',ref:'Sahih al-Bukhari'},
+  {title:'Leaving home',cat:'protection',situation:'When leaving home',text:"Bismillahi tawakkaltu 'alallah, la hawla wa la quwwata illa billah.",ref:'Sunan Abi Dawud'},
+  {title:'Entering the bathroom',cat:'protection',situation:'Before entering the bathroom',text:"Allahumma inni a'udhu bika minal-khubuthi wal-khaba'ith.",ref:'Sahih al-Bukhari'},
+  {title:'Leaving the bathroom',cat:'protection',situation:'After leaving the bathroom',text:'Ghufranak.',ref:'Sunan Abi Dawud'},
+  {title:'For parents',cat:'family',situation:'When asking mercy for your parents',text:'Rabbir-hamhuma kama rabbayanee sagheera.',ref:'Quran 17:24'},
+  {title:'For forgiveness',cat:'worship',situation:'When asking Allah to forgive you',text:'Rabbighfir lee.',ref:'Quran 23:118'},
+  {title:'For guidance',cat:'guidance',situation:'When asking to stay guided',text:'Rabbana la tuzigh qulubana ba’da idh hadaytana.',ref:'Quran 3:8'},
+  {title:'For travel',cat:'daily',situation:'When starting a journey',text:'Subhanalladhi sakhkhara lana hadha.',ref:'Quran 43:13'},
+  {title:'For ease',cat:'guidance',situation:'Before a difficult task',text:'Rabbishrah lee sadree.',ref:'Quran 20:25'}
+];
 
-    document.getElementById("modalTitle")
-        .textContent = title;
+const learningModules = [
+  {id:'foundations',title:'Islamic Foundations',copy:'A full introduction to the beliefs and purpose that shape a Muslim’s life.',pts:25,lesson:[
+    'Islam begins with knowing and worshipping Allah alone. Muslims believe that Allah is the Creator, Sustainer and Lord of everything, and that every person is responsible for how they use the life they have been given. Faith is not only an idea in the heart; it is meant to shape the way a person thinks, speaks and behaves every day.',
+    'Muslims also believe in Allah’s angels, His revealed books, His messengers, the Last Day and divine decree. These beliefs help a Muslim understand where they came from, why they are here and where life is ultimately going. They also give a person hope during difficult times because Allah knows what we cannot see and nothing happens outside His knowledge and wisdom.',
+    'Learning these foundations gives you a strong starting point for the rest of your Islamic learning. As you learn more, try to connect knowledge with action. Ask yourself what a lesson teaches you about Allah, how it should affect your choices and what small change you can make in your life.'
+  ],key:'Start with the basics: know what you believe, why you worship Allah, and how belief should affect your actions.'},
+  {id:'pillars',title:'Five Pillars',copy:'A full lesson on the Five Pillars and how they give Muslim life structure.',pts:20,lesson:[
+    'The Five Pillars are five central acts of Islam: the Shahadah, Salah, Zakah, Sawm and Hajj. They give Muslim life a practical structure built around belief, worship, responsibility and connection to Allah. Each pillar has its own purpose, but together they help a Muslim turn faith into everyday action.',
+    'The Shahadah is the testimony of faith: that there is no deity worthy of worship except Allah and that Muhammad is the Messenger of Allah. Salah is the five daily prayers, which give the day regular moments of worship and remembrance. Zakah is the obligatory charity for Muslims who meet the required conditions, helping purify wealth and support people in need.',
+    'Sawm refers to fasting in Ramadan, when Muslims abstain from food and drink from dawn until sunset while also working on patience, self-control and worship. Hajj is the pilgrimage to Makkah, required once in a lifetime for a Muslim who is physically and financially able to perform it. Learning what each pillar means can help you understand not only what Muslims do, but why they do it.'
+  ],key:'Remember the order: Shahadah, Salah, Zakah, Sawm, Hajj.'},
+  {id:'salah',title:'Salah Basics',copy:'Understand the purpose of prayer, preparation and building consistency.',pts:20,lesson:[
+    'Salah is the formal prayer that Muslims perform throughout the day. The five daily prayers are Fajr, Dhuhr, Asr, Maghrib and Isha. These prayers spread acts of worship across the day, reminding a Muslim to pause, remember Allah and return their attention to what matters most rather than becoming completely absorbed in everyday life.',
+    'Preparation is an important part of Salah. A Muslim normally makes wudu when purification is needed, makes sure the prayer time has entered and faces the Qiblah. The prayer itself includes standing, bowing, prostration and sitting while reciting words of praise, remembrance and supplication. Learning the meaning of what you recite can make prayer feel more personal and focused.',
+    'Consistency is built gradually. Rather than thinking only about completing a prayer, try to protect its time, prepare calmly and understand one small part of the prayer more deeply. When you miss a prayer or struggle to concentrate, use that moment as a reason to improve rather than a reason to give up.'
+  ],key:'Protect your prayer times, learn what you recite, and build consistency one prayer at a time.'},
+  {id:'quran',title:'Quran Reflection',copy:'Learn how to move from simply reading the Quran to thinking about its message.',pts:25,lesson:[
+    'The Quran is the revelation from Allah and is central to the life of a Muslim. Reading it is an act of worship, but learning from it also involves slowing down and thinking about what its verses are teaching. You do not need to read a huge amount at once for reflection to be meaningful. A small passage understood well can have a lasting effect.',
+    'When you read, look for what the passage teaches about Allah, people, choices, consequences, patience, gratitude and guidance. Think about the situation being described and ask why the lesson matters. When a verse encourages a good quality, consider where you can practise it. When a verse warns against something harmful, consider how you can protect yourself from it.',
+    'A useful habit is to read, understand, reflect and then act. You can write down one sentence about what stood out to you and one action you want to take. Over time, this turns Quran learning into a regular part of your life instead of something you only do occasionally.'
+  ],key:'Read, understand, reflect, then act.'},
+  {id:'character',title:'Character',copy:'Explore how patience, honesty, mercy and responsibility shape a Muslim’s behaviour.',pts:20,lesson:[
+    'Good character is a major part of Islamic life because faith should be visible in the way a person treats others. Patience, honesty, mercy, gratitude, humility and keeping promises are examples of qualities Muslims are encouraged to develop. Character is especially important when a person is annoyed, disappointed or dealing with someone who cannot give them anything in return.',
+    'Honesty means telling the truth even when a lie would be easier. Patience means controlling yourself when something goes wrong instead of immediately reacting with anger. Mercy means choosing kindness when you have the opportunity to be harsh. Gratitude means recognising blessings instead of constantly focusing on what you do not have. These qualities are built through repeated choices, not just by knowing their definitions.',
+    'A practical way to improve character is to choose one quality and watch for opportunities to practise it during the day. You might decide to be more patient with family, more honest about a mistake or more generous with your time. Small actions can become strong habits when you keep repeating them.'
+  ],key:'Good character turns knowledge into behaviour.'},
+  {id:'sunnah',title:'Sunnah Habits',copy:'Learn how simple Sunnah practices can make everyday life more purposeful.',pts:20,lesson:[
+    'The Sunnah includes the teachings, practices and example of Prophet Muhammad ﷺ. Learning the Sunnah is not only about collecting a long list of extra actions. It is about understanding how the Prophet worshipped Allah, treated people, handled difficulties and brought good manners into ordinary parts of life.',
+    'Simple habits can make a difference. Remembering Allah during the day, beginning actions with the appropriate words, showing kindness, eating and drinking with good manners, helping others and caring about cleanliness are examples of everyday behaviour connected with Islamic guidance. When these habits are practised with sincere intention, ordinary moments can become opportunities for worship and good deeds.',
+    'Choose one Sunnah habit at a time and practise it consistently until it becomes natural. Then add another. Learning slowly and applying what you learn is often more useful than trying to memorise everything at once. The goal is not to look perfect; it is to keep moving towards better worship, better manners and a stronger connection with Allah.'
+  ],key:'Choose one good Sunnah habit and practise it consistently.'}
+];
 
-    document.getElementById("modalBody")
-        .innerHTML =
-            lessons[title] ||
-            `<p>More learning content coming soon 🌿</p>`;
+const talks = [
+  {title:'A Striking Example from Surah Al-Baqarah',meta:'Nouman Ali Khan • Official Bayyinah',copy:'A recent Quran-focused lesson exploring how the Quran uses examples and how our approach to guidance shapes what we receive from it.',url:'https://www.youtube.com/watch?v=4gBbZDFot_M'},
+  {title:'The Bayyinah Vision',meta:'Nouman Ali Khan • Official Bayyinah',copy:'A helpful introduction to using Bayyinah resources as a deeper Quran learning journey.',url:'https://www.youtube.com/watch?v=wGLDfdFepk4'},
+  {title:'Surah Al-Bayyinah — Day 23',meta:'Ramadan with the Quran',copy:'A Quran study session unpacking the opening verses of Surah Al-Bayyinah and several important Arabic terms.',url:'https://www.youtube.com/watch?v=wk0qAXWCySw'},
+  {title:'Freedom Beyond the Physical',meta:'Nouman Ali Khan • Official Bayyinah',copy:'A khutbah exploring physical and mental freedom through the Quranic story of the Israelites and Pharaoh.',url:'https://www.youtube.com/watch?v=EY7wxor9sfQ'}
+];
 
-    document.getElementById("modal")
-        .classList.add("show");
+const quizQuestions = [
+  {q:'Which prophet built the ark by Allah’s command?',a:['Nuh','Yusuf','Musa','Yunus'],c:0},
+  {q:'Which prophet was placed into the fire and protected by Allah?',a:['Ibrahim','Ayyub','Zakariyya','Sulayman'],c:0},
+  {q:'Which prophet is strongly associated with the story of the whale?',a:['Yunus','Musa','Isa','Adam'],c:0},
+  {q:'Which prophet is described as an excellent example for believers?',a:['Muhammad','Nuh','Yusuf','Ibrahim'],c:0},
+  {q:'Which prophet is known for patience through severe hardship?',a:['Ayyub','Yunus','Isa','Zakariyya'],c:0}
+];
+const duaChallenge = [
+  {q:'Which dua fits leaving home?',a:['Bismillah','Bismillahi tawakkaltu alallah...','Ghufranak','Rabbighfir lee'],c:1},
+  {q:'Which dua is for parents?',a:['Rabbir-hamhuma kama rabbayanee sagheera','Bismillah','Rabbishrah lee sadree','Subhanalladhi sakhkhara lana hadha'],c:0},
+  {q:'Which dua fits before sleep?',a:['Rabbighfir lee','Bismika Allahumma amutu wa ahya','Ghufranak','Bismillah'],c:1},
+  {q:'Which dua asks for ease and expansion of the chest?',a:['Rabbishrah lee sadree','Bismillah','Ghufranak','Rabbana la tuzigh qulubana...'],c:0}
+];
+const facts = [
+  {q:'The Five Pillars are five core acts and commitments in Islam.',t:true},
+  {q:'Fajr is the midday prayer.',t:false},
+  {q:'Sadaqah can refer to voluntary charity.',t:true},
+  {q:'The Quran mentions Prophet Yusuf in a dedicated surah.',t:true},
+  {q:'Maghrib begins after the sun has set.',t:true},
+  {q:'There are six Five Pillars.',t:false},
+  {q:'The word salah refers to the ritual prayer.',t:true}
+];
+const pillarsOrder = ['Shahadah','Salah','Zakah','Sawm','Hajj'];
+const memoryPairs = [['🕌','Salah'],['🌙','Ramadan'],['📖',"Qur'an"],['🤲','Dua'],['🕋','Hajj'],['💚','Sadaqah'],['☪','Islam'],['⭐','Ihsan']];
 
+const el = id => document.getElementById(id);
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));updateAll()}
+function load(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY); if(!raw)return;
+    Object.assign(state,JSON.parse(raw));
+  }catch(e){}
+}
+function todayKey(){return new Date().toISOString().slice(0,10)}
+function addPoints(n,reason=''){state.points+=n; toast(`+${n} points${reason?` — ${reason}`:''}`); beep('score'); save()}
+function touchStreak(){
+  const today=todayKey();
+  if(state.lastActive===today)return;
+  const last=state.lastActive?new Date(state.lastActive):null;
+  const current=new Date(today);
+  if(last){const diff=Math.round((current-last)/86400000); state.streak=diff===1?state.streak+1:1}else state.streak=1;
+  state.lastActive=today;
+}
+function toast(msg){const t=el('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),1800)}
+function escapeHtml(s){return s.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[c]))}
+
+function navigate(section){
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.section===section));
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===`page-${section}`));
+  const names={home:'Home',learn:'Learn',stories:'Stories',duas:'Duas',dailyduas:'Daily Duas',salah:'Salah',talks:'Talks',games:'Games',rewards:'Rewards',sadaqah:'Sadaqah',settings:'Settings'};
+  el('pageTitle').textContent=names[section]||section;
+  window.scrollTo({top:0,behavior:'smooth'});
+  touchStreak(); save();
 }
 
-function closeModal() {
+function updateAll(){
+  el('homePoints').textContent=state.points; el('homeStreak').textContent=state.streak; el('homeGames').textContent=state.gamesPlayed; el('homeBest').textContent=state.bestScore;
+  el('sidePoints').textContent=state.points; el('sideStreak').textContent=`${state.streak} day${state.streak===1?'':'s'}`;
+  const done=learningModules.filter(m=>state.learning[m.id]).length; const pct=Math.round(done/learningModules.length*100);
+  el('homeLearningTitle').textContent=`${pct}% complete`; el('homeLearnMeter').style.width=`${pct}%`; el('homeLearnText').textContent=`${done} of ${learningModules.length} modules completed`;
+  el('dhikrCount').textContent=state.dhikr; el('homeDhikr').textContent=state.dhikr;
+  const rem=state.reminder; el('homeReminderState').textContent=rem?'Reminder ON':'Reminder OFF';
+  setToggle(el('reminderToggle'),rem); setToggle(el('settingsReminder'),rem); setToggle(el('soundToggle'),state.sound); setToggle(el('settingsTheme'),state.dark);
+  document.body.classList.toggle('light',!state.dark); el('main').classList.toggle('phone-preview',state.previewPhone); el('previewBtn').textContent=state.previewPhone?'Mobile Preview':'Desktop Preview'; el('themeBtn').textContent=state.dark?'LIGHT':'DARK';
+  renderLearning(); renderRewards();
+}
+function setToggle(btn,on){if(btn)btn.classList.toggle('on',!!on)}
 
-    document.getElementById("modal")
-        .classList.remove("show");
-
+function renderLearning(){
+  const grid=el('learnGrid');
+  grid.innerHTML=learningModules.map(m=>`<div class="learn-card"><div class="card-kicker">MODULE // ${m.pts} POINTS</div><div class="card-title">${escapeHtml(m.title)}</div><div class="card-copy">${escapeHtml(m.copy)}</div><div class="inline"><span class="small">${state.learning[m.id]?'Completed':'Ready to learn'}</span><button class="ghost-btn learn-open" data-id="${m.id}">Open lesson</button><button class="primary-btn learn-complete" data-id="${m.id}" ${state.learning[m.id]?'disabled':''}>${state.learning[m.id]?'Completed':'Complete +'+m.pts}</button></div></div>`).join('');
+  grid.querySelectorAll('.learn-open').forEach(btn=>btn.addEventListener('click',()=>openLesson(btn.dataset.id)));
+  grid.querySelectorAll('.learn-complete').forEach(btn=>btn.addEventListener('click',()=>completeLesson(btn.dataset.id)));
+}
+function completeLesson(id){
+  const m=learningModules.find(x=>x.id===id); if(!m||state.learning[m.id])return;
+  state.learning[m.id]=true; touchStreak(); addPoints(m.pts,'learning'); renderLearning();
+}
+function openLesson(id){
+  const m=learningModules.find(x=>x.id===id); if(!m)return;
+  const paragraphs=m.lesson.map(par=>`<p>${escapeHtml(par)}</p>`).join('');
+  openModal(`<div class="modal-head"><div><div class="card-kicker">LEARN // ${m.pts} POINTS</div><div class="modal-title">${escapeHtml(m.title)}</div></div><button class="icon-btn modal-close">X</button></div><div class="modal-copy lesson-reading" style="line-height:1.85">${paragraphs}</div><div class="panel" style="margin-top:14px"><div class="card-kicker">KEY IDEA</div><div class="card-copy" style="font-size:14px;color:var(--text)">${escapeHtml(m.key)}</div></div><div class="game-footer"><span class="game-status">${state.learning[m.id]?'Module completed':'Read the lesson, then complete it'}</span><button class="primary-btn" id="lessonComplete" ${state.learning[m.id]?'disabled':''}>${state.learning[m.id]?'Completed':'Complete +'+m.pts}</button></div>`);
+  const done=el('lessonComplete'); if(done&&!state.learning[m.id])done.addEventListener('click',()=>{completeLesson(m.id);closeModal();toast(`${m.title} completed`)});
 }
 
+function renderStories(){
+  el('storyGrid').innerHTML=stories.map((s,i)=>`<div class="story-card"><div class="story-ref">STORY ${String(i+1).padStart(2,'0')} // ${s.ref}</div><div class="card-title">${s.name}</div><div class="card-copy">${s.summary}</div><button class="ghost-btn story-open" data-index="${i}">Open reader</button></div>`).join('');
+  document.querySelectorAll('.story-open').forEach(b=>b.addEventListener('click',()=>openStory(+b.dataset.index)));
+}
+function openStory(i){
+  const s=stories[i]; openModal(`<div class="modal-head"><div><div class="card-kicker">${s.ref}</div><div class="modal-title">${s.name}</div></div><button class="icon-btn modal-close">X</button></div><div class="modal-copy">${s.body}</div><div class="game-footer"><span class="game-status">Reader complete</span><button class="primary-btn" id="storyDone">Mark read +10</button></div>`); el('storyDone').addEventListener('click',()=>{addPoints(10,'story');closeModal()});
+}
 
-/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+function renderDuas(){
+  const search=el('duaSearch').value.trim().toLowerCase(); const cat=el('duaCategory').value;
+  const found=duas.filter(d=>{const hit=`${d.title} ${d.situation} ${d.text} ${d.cat}`.toLowerCase().includes(search); return hit&&(cat==='all'||d.cat===cat)});
+  el('duaList').innerHTML=found.length?found.map((d,i)=>`<div class="dua-card"><div class="inline"><div><div class="card-kicker">${d.cat}</div><div class="card-title">${escapeHtml(d.title)}</div></div><button class="ghost-btn dua-complete" data-title="${escapeHtml(d.title)}">Complete +8</button></div><div class="card-copy">${escapeHtml(d.situation)}</div><div class="ayah">${escapeHtml(d.text)}</div><div class="ref">${escapeHtml(d.ref)}</div></div>`).join(''):`<div class="empty">No duas match your search.</div>`;
+  document.querySelectorAll('.dua-complete').forEach(b=>b.addEventListener('click',()=>{touchStreak();addPoints(8,'dua')}));
+}
+function renderChips(){
+  const labels=[['all','All'],['daily','Daily life'],['worship','Worship'],['protection','Protection'],['family','Family'],['guidance','Guidance']];
+  el('duaChips').innerHTML=labels.map(([v,t])=>`<button class="chip ${el('duaCategory').value===v?'active':''}" data-cat="${v}">${t}</button>`).join('');
+  document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{el('duaCategory').value=b.dataset.cat;renderChips();renderDuas()}));
+}
 
-document
-    .getElementById("modal")
-    .addEventListener("click", function(e) {
+function dailyIndex(){const now=new Date();return (now.getDate()+now.getMonth()+now.getFullYear())%duas.length}
+function renderDailyDuas(){
+  const idx=(state.todayFocus||0)%duas.length; const f=duas[idx];
+  el('dailyFocusTitle').textContent=f.title; el('dailyFocusCopy').textContent=f.situation; el('dailyFocusText').textContent=f.text; el('dailyFocusRef').textContent=f.ref;
+  el('dailyDuaGrid').innerHTML=duas.slice(0,8).map((d,i)=>`<div class="dua-card"><div class="card-kicker">Daily ${String(i+1).padStart(2,'0')}</div><div class="card-title">${escapeHtml(d.title)}</div><div class="ayah">${escapeHtml(d.text)}</div><div class="ref">${escapeHtml(d.ref)}</div><div class="hero-actions" style="margin-top:12px"><button class="ghost-btn daily-complete" data-i="${i}">${state.dailyDone[todayKey()+':'+i]?'Completed':'Complete +7'}</button></div></div>`).join('');
+  document.querySelectorAll('.daily-complete').forEach(b=>b.addEventListener('click',()=>{const key=todayKey()+':'+b.dataset.i;if(state.dailyDone[key])return;state.dailyDone[key]=true;touchStreak();addPoints(7,'daily dua');renderDailyDuas()}));
+  const key=todayKey()+':focus'; el('dailyFocusComplete').textContent=state.dailyDone[key]?'Completed':'Complete +15'; el('dailyFocusComplete').disabled=!!state.dailyDone[key];
+}
 
-        if(e.target === this) {
-            closeModal();
-        }
+function parseHM(v){const [h,m]=v.split(':').map(Number);return h*60+m}
+function formatTime12(hm){const [h,m]=hm.split(':').map(Number);const ap=h>=12?'PM':'AM';const hh=h%12||12;return `${hh}:${String(m).padStart(2,'0')} ${ap}`}
+function prayerDateFromTime(hm,base=new Date()) {const [h,m]=hm.split(':').map(Number);const d=new Date(base);d.setHours(h,m,0,0);return d}
+async function fetchPrayerTimes(){
+  el('prayerSource').textContent='Loading London prayer times...';
+  try{
+    const res=await fetch('https://api.aladhan.com/v1/timingsByCity?city=London&country=United%20Kingdom&method=3');
+    const data=await res.json();
+    const t=data?.data?.timings;
+    if(!t)throw new Error('No timings');
+    const order=[['Fajr',t.Fajr],['Dhuhr',t.Dhuhr],['Asr',t.Asr],['Maghrib',t.Maghrib],['Isha',t.Isha]].map(([name,time])=>({name,time:time.slice(0,5)}));
+    state.prayerTimes=order; state.prayerSource='Online London times'; save(); renderPrayers(); toast('Prayer times updated');
+  }catch(e){state.prayerTimes=fallbackPrayers;state.prayerSource='Offline fallback schedule';save();renderPrayers();toast('Using offline prayer schedule')}
+}
+function renderPrayers(){
+  el('prayerSource').textContent=state.prayerSource;
+  el('prayerGrid').innerHTML=state.prayerTimes.map(p=>`<div class="stat-card"><div class="stat-label">${p.name}</div><div class="stat-value" style="font-size:24px">${formatTime12(p.time)}</div><div class="stat-note">Local prayer time</div></div>`).join('');
+  updateCountdown();
+}
+function getNextPrayer(){
+  const now=new Date(); const minutes=now.getHours()*60+now.getMinutes()+now.getSeconds()/60;
+  const arr=state.prayerTimes.map(p=>({...p,mins:parseHM(p.time)}));
+  let next=arr.find(p=>p.mins>minutes); let start=arr[arr.length-1];
+  if(!next)next={...arr[0],mins:arr[0].mins+1440};
+  if(next===arr[0]&&minutes<arr[0].mins)start={...arr[arr.length-1],mins:arr[arr.length-1].mins-1440};
+  const nextDate=prayerDateFromTime(next.time,new Date()); if(next.mins>=1440)nextDate.setDate(nextDate.getDate()+1);
+  let startDate;
+  if(next.mins>=1440)startDate=prayerDateFromTime(arr[arr.length-1].time,new Date()); else { const idx=arr.findIndex(x=>x.name===next.name); const prev=idx>0?arr[idx-1]:{...arr[arr.length-1],mins:arr[arr.length-1].mins-1440}; startDate=prayerDateFromTime(prev.time,new Date()); if(idx===0)startDate.setDate(startDate.getDate()-1); }
+  return {next,nextDate,startDate};
+}
+function updateCountdown(){
+  const {next,nextDate,startDate}=getNextPrayer(); const ms=Math.max(0,nextDate-new Date()); const totalSec=Math.floor(ms/1000); const h=Math.floor(totalSec/3600), m=Math.floor(totalSec%3600/60), s=totalSec%60;
+  el('nextPrayerName').textContent=next.name; el('nextPrayerTime').textContent=formatTime12(next.time); el('countdown').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  const span=Math.max(1,nextDate-startDate); const elapsed=Math.max(0,Date.now()-startDate.getTime()); el('prayerProgress').style.width=`${Math.min(100,elapsed/span*100)}%`;
+}
 
-    });
+function renderTalks(){
+  el('talkGrid').innerHTML=talks.map((t,i)=>`<div class="talk-card"><div class="talk-top"><div><div class="card-kicker">Talk ${String(i+1).padStart(2,'0')}</div><div class="talk-title">${escapeHtml(t.title)}</div></div><div class="talk-index">YT</div></div><div class="talk-meta">${escapeHtml(t.meta)}</div><div class="card-copy">${escapeHtml(t.copy)}</div><button class="primary-btn talk-open" data-url="${t.url}">Open on YouTube</button></div>`).join('');
+  document.querySelectorAll('.talk-open').forEach(b=>b.addEventListener('click',()=>{window.open(b.dataset.url,'_blank','noopener');addPoints(4,'talks')}));
+}
 
+function renderRewards(){
+  const rewards=[{name:'FIRST STEP',need:25,copy:'Reach 25 points.'},{name:'LEARNER',need:100,copy:'Reach 100 points.'},{name:'STREAK BUILDER',need:7,mode:'streak',copy:'Build a 7 day streak.'},{name:'GAME RUNNER',need:10,mode:'games',copy:'Play 10 games.'},{name:'NEON MASTER',need:500,copy:'Reach 500 points.'},{name:'DUA HABIT',need:5,mode:'daily',copy:'Complete 5 daily duas.'},{name:'SADAQAH START',need:1,mode:'sadaqah',copy:'Use the Sadaqah page once.'},{name:'HIGH SCORE',need:100,mode:'best',copy:'Score 100 in a game.'}];
+  el('rewardGrid').innerHTML=rewards.map(r=>{let progress=state.points; if(r.mode==='streak')progress=state.streak;if(r.mode==='games')progress=state.gamesPlayed;if(r.mode==='best')progress=state.bestScore;if(r.mode==='daily')progress=Object.keys(state.dailyDone).length;if(r.mode==='sadaqah')progress=state.rewards.sadaqah?1:0;const unlocked=progress>=r.need;return `<div class="reward-card ${unlocked?'':'locked'}"><span class="reward-badge">${unlocked?'UNLOCKED':'LOCKED'}</span><div class="card-title">${r.name}</div><div class="card-copy">${r.copy}</div><div class="small">${Math.min(progress,r.need)} / ${r.need}</div></div>`}).join('');
+}
+
+let currentGame={type:null,data:null,score:0};
+let activeGameTimer=null;
+function launchGame(type){
+  if(activeGameTimer){clearInterval(activeGameTimer);clearTimeout(activeGameTimer);activeGameTimer=null;}
+  currentGame={type,score:0,data:{}}; touchStreak();
+  if(type==='prophet')startProphet(); if(type==='pillars')startPillars(); if(type==='memory')startMemory(); if(type==='dua')startDuaGame(); if(type==='fact')startFact(); if(type==='daily')startDailyGame();
+}
+function startGameModal(title,inner){openModal(`<div class="modal-head"><div><div class="card-kicker">NEON GAME ZONE</div><div class="modal-title">${title}</div></div><button class="icon-btn modal-close">X</button></div>${inner}`)}
+function finishGame(label,score){
+  state.gamesPlayed++; state.points+=score; state.bestScore=Math.max(state.bestScore,score); state.bestByGame[currentGame.type]=Math.max(state.bestByGame[currentGame.type]||0,score); touchStreak(); beep('win'); save();
+  openModal(`<div class="modal-head"><div><div class="card-kicker">GAME COMPLETE</div><div class="modal-title">${label}</div></div><button class="icon-btn modal-close">X</button></div><div style="font-size:54px;font-weight:1000;line-height:1">${score}</div><div class="modal-copy">Score saved. Points added. Best score updated automatically.</div><div class="game-footer"><span class="game-status">Games played: ${state.gamesPlayed}</span><button class="primary-btn" data-section="games" id="backGames">Back to Games</button></div>`);
+  el('backGames').addEventListener('click',()=>{closeModal();navigate('games')});
+}
+function startProphet(){
+  let i=0,score=0;
+  const render=()=>{const q=quizQuestions[i];startGameModal('PROPHET RUSH',`<div class="small">Question ${i+1} of ${quizQuestions.length}</div><div class="question">${q.q}</div><div class="option-grid">${q.a.map((x,j)=>`<button class="option-btn quiz-opt" data-i="${j}">${escapeHtml(x)}</button>`).join('')}</div><div class="game-footer"><span class="game-status">Score: ${score}</span><span class="game-status">+10 each correct</span></div>`);document.querySelectorAll('.quiz-opt').forEach(b=>b.addEventListener('click',()=>{const pick=+b.dataset.i;document.querySelectorAll('.quiz-opt').forEach(x=>x.disabled=true);if(pick===q.c){b.classList.add('correct');score+=10;currentGame.score=score;beep('correct')}else{b.classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.c].classList.add('correct');beep('wrong')}setTimeout(()=>{i++;if(i<quizQuestions.length)render();else finishGame('PROPHET RUSH',score)},500)}))};render();
+}
+function startDuaGame(){
+  let i=0,score=0;
+  const render=()=>{const q=duaChallenge[i];startGameModal('DUA DETECTIVE',`<div class="small">Situation ${i+1} of ${duaChallenge.length}</div><div class="question">${q.q}</div><div class="option-grid">${q.a.map((x,j)=>`<button class="option-btn dua-opt" data-i="${j}">${escapeHtml(x)}</button>`).join('')}</div><div class="game-footer"><span class="game-status">Score: ${score}</span><span class="game-status">+12 each correct</span></div>`);document.querySelectorAll('.dua-opt').forEach(b=>b.addEventListener('click',()=>{const pick=+b.dataset.i;document.querySelectorAll('.dua-opt').forEach(x=>x.disabled=true);if(pick===q.c){b.classList.add('correct');score+=12;beep('correct')}else{b.classList.add('wrong');document.querySelectorAll('.dua-opt')[q.c].classList.add('correct');beep('wrong')}setTimeout(()=>{i++;if(i<duaChallenge.length)render();else finishGame('DUA DETECTIVE',score)},500)}))};render();
+}
+function startPillars(){
+  let pos=0,score=0;
+  startGameModal('PILLARS SPRINT',`<div class="modal-copy">Tap the Five Pillars in the correct order.</div><div class="pillars-wrap" id="pillarChoices">${pillarsOrder.map((p,i)=>`<button class="pillar-choice" data-i="${i}">${p}</button>`).join('')}</div><div class="game-footer"><span class="game-status">Next: ${pillarsOrder[0]}</span><span class="game-status" id="pillarScore">Score: 0</span></div>`);
+  document.querySelectorAll('.pillar-choice').forEach(b=>b.addEventListener('click',()=>{const pick=+b.dataset.i;if(pick===pos){b.classList.add('correct','used');score+=10;pos++;beep('correct');el('pillarScore').textContent=`Score: ${score}`;if(pos<pillarsOrder.length)document.querySelector('.game-footer .game-status').textContent=`Next: ${pillarsOrder[pos]}`;else setTimeout(()=>finishGame('PILLARS SPRINT',score),400)}else{b.classList.add('used');beep('wrong');score=Math.max(0,score-5);el('pillarScore').textContent=`Score: ${score}`}}));
+}
+function startMemory(){
+  const cards=[...memoryPairs,...memoryPairs].map((x,i)=>({id:i,sym:x[0],name:x[1],matched:false,flipped:false})).sort(()=>Math.random()-.5);
+  let first=null,lock=false,matches=0,moves=0;
+  const render=()=>{startGameModal('DEEN MATCH',`<div class="small">Flip. Match. Remember.</div><div class="memory-grid" id="memoryGrid">${cards.map(c=>`<button class="memory-card ${c.flipped?'flipped':''} ${c.matched?'matched':''}" data-id="${c.id}"><span class="front">${c.sym}</span><span class="back">DEENLY</span></button>`).join('')}</div><div class="game-footer"><span class="game-status">Moves: ${moves}</span><span class="game-status">Matches: ${matches}/${memoryPairs.length}</span></div>`);document.querySelectorAll('.memory-card').forEach(b=>b.addEventListener('click',()=>{if(lock)return;const c=cards.find(x=>x.id===+b.dataset.id);if(c.flipped||c.matched)return;c.flipped=true;moves++;beep('flip');render();if(!first){first=c;return}lock=true;const second=c;if(first.sym===second.sym){first.matched=second.matched=true;matches++;first=null;lock=false;beep('correct');render();if(matches===memoryPairs.length)setTimeout(()=>finishGame('DEEN MATCH',Math.max(0,100-moves*3)),450)}else{setTimeout(()=>{first.flipped=false;second.flipped=false;first=null;lock=false;beep('wrong');render()},650)}}))};render();
+}
+function startFact(){
+  let deck=[...facts].sort(()=>Math.random()-.5),i=0,score=0,interval;
+  const render=()=>{const q=deck[i];startGameModal('FACT ATTACK',`<div class="small">Question ${i+1} of ${deck.length}</div><div class="question">${q.q}</div><div class="timer-strip"><span id="factTimer" style="width:100%"></span></div><div class="hero-actions"><button class="primary-btn fact-opt" data-v="true">TRUE</button><button class="ghost-btn fact-opt" data-v="false">FALSE</button></div><div class="game-footer"><span class="game-status">Score: ${score}</span><span class="game-status" id="factSeconds">20s</span></div>`);clearInterval(interval);let started=Date.now();interval=setInterval(()=>{const left=Math.max(0,20-Math.floor((Date.now()-started)/1000));el('factSeconds').textContent=`${left}s`;el('factTimer').style.width=`${left/20*100}%`;if(left<=0){clearInterval(interval);i++;if(i<deck.length)render();else finishGame('FACT ATTACK',score)}},200);document.querySelectorAll('.fact-opt').forEach(b=>b.addEventListener('click',()=>{clearInterval(interval);document.querySelectorAll('.fact-opt').forEach(x=>x.disabled=true);const v=b.dataset.v==='true';if(v===q.t){score+=15;b.classList.add('correct');beep('correct')}else{b.classList.add('wrong');beep('wrong')}setTimeout(()=>{i++;if(i<deck.length)render();else finishGame('FACT ATTACK',score)},350)}))};render();
+}
+function startDailyGame(){
+  const idx=dailyIndex(); const prompts=[
+    {q:'Which pillar is performed five times each day?',a:['Salah','Hajj','Zakah','Sawm'],c:0},
+    {q:'Which surah tells the story of Yusuf across one continuous narrative?',a:["Surah Yusuf","Surah Maryam","Surah Nuh","Surah Al-Fajr"],c:0},
+    {q:'What is voluntary charity commonly called?',a:['Sadaqah','Sawm','Salah','Hajj'],c:0},
+    {q:'Which prayer comes after Asr?',a:['Maghrib','Isha','Dhuhr','Fajr'],c:0}
+  ][idx%4];
+  startGameModal('DAILY CHALLENGE',`<div class="small">One challenge. One score. Every day.</div><div class="question">${q.q}</div><div class="option-grid">${q.a.map((x,j)=>`<button class="option-btn daily-opt" data-i="${j}">${escapeHtml(x)}</button>`).join('')}</div><div class="game-footer"><span class="game-status">Daily score: 0</span><span class="game-status">Today: ${todayKey()}</span></div>`);document.querySelectorAll('.daily-opt').forEach(b=>b.addEventListener('click',()=>{const pick=+b.dataset.i;document.querySelectorAll('.daily-opt').forEach(x=>x.disabled=true);let score=pick===q.c?30:0;if(pick===q.c){b.classList.add('correct');beep('correct')}else{b.classList.add('wrong');document.querySelectorAll('.daily-opt')[q.c].classList.add('correct');beep('wrong')}state.dailyGameDone=todayKey();setTimeout(()=>finishGame('DAILY CHALLENGE',score),500)}));
+}
+
+function beep(kind='click'){
+  if(!state.sound)return;
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC)return; const ctx=new AC(); const o=ctx.createOscillator(); const g=ctx.createGain(); const freq={click:520,correct:720,wrong:220,score:880,win:980,flip:380}[kind]||520;o.frequency.value=freq;o.type='sine';g.gain.value=.035;o.connect(g);g.connect(ctx.destination);o.start();setTimeout(()=>{g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+.12)},20);setTimeout(()=>{o.stop();ctx.close()},140)
+  }catch(e){}
+}
+
+function toggleTheme(){state.dark=!state.dark;save();beep('click')}
+function togglePreview(){state.previewPhone=!state.previewPhone;save();toast(state.previewPhone?'Mobile preview enabled':'Desktop preview enabled')}
+function toggleReminder(){state.reminder=!state.reminder;save();toast(state.reminder?'Prayer reminder enabled':'Prayer reminder disabled')}
+function speakReminder(){
+  const {next}=getNextPrayer();
+  if('speechSynthesis' in window){window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(`Next prayer is ${next.name} at ${formatTime12(next.time)}.`);u.rate=.95;u.pitch=1;window.speechSynthesis.speak(u);toast('Reminder spoken')}else toast('Speech is not supported in this browser');
+}
+function updateReminderLoop(){
+  if(!state.reminder)return; const now=new Date(); const min=now.getHours()*60+now.getMinutes(); const timeNow=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`; const hit=state.prayerTimes.find(p=>p.time===timeNow); if(hit && state.lastReminder!==todayKey()+timeNow){state.lastReminder=todayKey()+timeNow;save(); if('speechSynthesis'in window){const u=new SpeechSynthesisUtterance(`${hit.name} time has arrived.`);window.speechSynthesis.speak(u)}toast(`${hit.name} reminder`)}}
+
+function openModal(html){el('modal').innerHTML=html;el('modalWrap').classList.add('show');attachModalClose()}
+function attachModalClose(){document.querySelectorAll('.modal-close').forEach(b=>b.addEventListener('click',closeModal))}
+function closeModal(){el('modalWrap').classList.remove('show');if(activeGameTimer){clearInterval(activeGameTimer);clearTimeout(activeGameTimer);activeGameTimer=null;}}
+
+function bindStatic(){
+  document.querySelectorAll('[data-section]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.section)));
+  el('themeBtn').addEventListener('click',toggleTheme); el('settingsTheme').addEventListener('click',toggleTheme);
+  el('previewBtn').addEventListener('click',togglePreview); el('settingsPreview').addEventListener('click',togglePreview);
+  el('homeSadaqah').addEventListener('click',()=>navigate('sadaqah'));
+  el('homeReminder').addEventListener('click',toggleReminder);
+  el('reminderToggle').addEventListener('click',toggleReminder); el('settingsReminder').addEventListener('click',toggleReminder); el('speakReminder').addEventListener('click',speakReminder);
+  el('dhikrAdd').addEventListener('click',()=>{state.dhikr++;touchStreak();beep('click');save()}); el('homeDhikrAdd').addEventListener('click',()=>{state.dhikr++;touchStreak();beep('click');save()});
+  el('dhikrReset').addEventListener('click',()=>{state.dhikr=0;save();toast('Dhikr reset')}); el('homeDhikrReset').addEventListener('click',()=>{state.dhikr=0;save();toast('Dhikr reset')});
+  el('soundToggle').addEventListener('click',()=>{state.sound=!state.sound;save();});
+  el('resetProgress').addEventListener('click',()=>{if(confirm('Reset all Deenly progress?')){localStorage.removeItem(STORAGE_KEY);location.reload()}});
+  el('duaSearch').addEventListener('input',renderDuas); el('duaCategory').addEventListener('change',()=>{renderChips();renderDuas()});
+  el('dailyRefresh').addEventListener('click',()=>{state.todayFocus=(state.todayFocus+1)%duas.length;save();toast('Focus changed')});
+  el('dailyFocusComplete').addEventListener('click',()=>{const key=todayKey()+':focus';if(state.dailyDone[key])return;state.dailyDone[key]=true;touchStreak();addPoints(15,'daily focus');renderDailyDuas()});
+  el('refreshPrayers').addEventListener('click',fetchPrayerTimes);
+  el('charityBtn').addEventListener('click',()=>{window.open('https://www.islamic-relief.org.uk/giving/islamic-giving/sadaqah/','_blank','noopener');if(!state.rewards.sadaqah){state.rewards.sadaqah=true;addPoints(10,'sadaqah');}else{toast('Sadaqah page opened')}});
+  document.querySelectorAll('[data-game]').forEach(b=>b.addEventListener('click',()=>launchGame(b.dataset.game)));
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+el('modalWrap').addEventListener('click',e=>{if(e.target===el('modalWrap'))closeModal()});
+
+load();
+touchStreak();
+if(!state.todayFocus)state.todayFocus=dailyIndex();
+bindStatic();
+renderStories();renderDuas();renderChips();renderDailyDuas();renderTalks();renderPrayers();updateAll();
+fetchPrayerTimes();
+setInterval(updateCountdown,1000); setInterval(updateReminderLoop,20000); setInterval(updateAll,15000);
 </script>
-
 </body>
 </html>
-```
